@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import home, sales, login, dashboard, products, logout
+from home.views import home, sales, login, dashboard, products, logout,addproduct,deferredpayment
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -26,5 +26,7 @@ urlpatterns = [
     path('dashboard/', dashboard),
     path('products/', products),
     path('logout/', logout),
+    path('addproduct/', addproduct),
+    path('deferredpayment/',deferredpayment),
     
 ]

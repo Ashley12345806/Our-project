@@ -18,3 +18,10 @@ def products(request):
 
 def logout(request):
     return render(request, 'logout.html')
+
+def addproduct(request):
+    return render(request, 'addproduct.html')
+
+def deferredpayment(request):
+    return render(request, 'deferredpayment.html')
+
