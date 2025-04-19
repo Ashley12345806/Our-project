@@ -1,0 +1,75 @@
+body {
+    background-image: url('/static/images/shop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 3rem;
+    color: #ffffff;
+    margin-top: 2rem;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+}
+
+/* Transparent card style */
+.card {
+    background-color: rgba(255, 255, 255, 0.15); /* transparent white */
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(8px); /* frosted glass effect */
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+
+footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    padding: 10px 0;
+    text-align: center;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+/* Make the warning button and its link look good */
+.btn-warning a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+.btn-warning a:hover {
+    color: black;
+}
+
+/* Optional: make sure cards are nicely spaced in a grid */
+.card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}

@@ -1,0 +1,51 @@
+body {
+    background-image: url('/static/images/shop.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: #ffffff; /* Light text color for readability */
+}
+
+.card {
+    width: 30rem;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    background-color: rgba(161, 148, 148, 0.92); /* Semi-transparent dark background for the card */
+    padding: 20px;
+    text-align: center;
+}
+
+.card-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.card-text {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background-color: #d95427;
+    border: none;
+    font-size: 1rem;
+    padding: 10px 20px; /* smaller padding */
+    border-radius: 30px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: inline-block; /* prevent full width */
+    margin: 0 auto; /* auto margin for centering if needed */
+}
+
+
+.btn-primary:hover {
+    background-color: #c13d1a; /* Darker orange on hover */
+    transform: scale(1.1); /* Slight zoom effect on hover */
+}

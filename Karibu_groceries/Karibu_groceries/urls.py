@@ -16,17 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from home.views import home, sales, login, dashboard, products, logout,addproduct,deferredpayment
-
+#accessing our views from  kgl_app
+from kgl_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', home),
-    path('sales/', sales),
-    path('login/', login),
-    path('dashboard/', dashboard),
-    path('products/', products),
-    path('logout/', logout),
-    path('addproduct/', addproduct),
-    path('deferredpayment/',deferredpayment),
-    
+    path('', views.index, name='index'),
+    path('index/', views.home, name='home'),
+    path('sales/', views.sales, name='sales'),
+    path('login/', views.login, name='login'),
+    path('dashboard/', views.dashboard, name='dashboard'),
+    path('logout/', views.logout, name='logout'),
+    path('addproduct/', views.addproduct, name='addproduct'),
+    path('deferredpaymentlist/',views.deferredpaymentlist, name ='deferredpaymentlist'),
+    path('deferredpayment/', views.deferredpayment, name='deferredpayment'),
+    path('signup/', views.signup, name='signup'),
 ]

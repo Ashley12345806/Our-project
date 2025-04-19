@@ -1,0 +1,79 @@
+/* Body Styling */
+body {
+    background: linear-gradient(135deg, #374236 0%, #806f66 100%); /* Earthy gradient */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  /* Glass-like Container */
+  .container {
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.15); /* Slightly transparent */
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.37); /* Smooth shadow effect */
+    backdrop-filter: blur(10px); /* Blurred background */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #ffffff;
+  }
+  
+  /* Header Styling */
+  h3 {
+    text-align: center;
+    font-size: 2rem;
+    font-family: 'Poppins', sans-serif;
+    color: #ffffff;
+    margin-bottom: 1.5rem;
+    text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  }
+  
+  /* Labels */
+  .form-group label {
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  /* Input Fields */
+  .form-control {
+    border: none;
+    border-radius: 8px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: rgba(255, 255, 255, 0.3); /* Translucent field */
+    color: #ffffff;
+    backdrop-filter: blur(3px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-control::placeholder {
+    color: #e0e0e0;
+  }
+  
+  /* Checkbox Label */
+  .form-check-label {
+    color: #f0f0f0;
+  }
+  
+  /* Buttons */
+  button {
+    width: 100%;
+    background-color: #ffffff;
+    color: #3c4045;
+    padding: 12px 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  button:hover {
+    background-color: #f3f3f3;
+    transform: scale(1.05);
+  }
+  
+  
