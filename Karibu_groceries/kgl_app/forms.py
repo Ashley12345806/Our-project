@@ -5,6 +5,7 @@ from .models import *
 from .models import Deffered_payment
 from django.contrib.auth.models import User
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
 
 class ProductForm(ModelForm):
     class Meta:
@@ -41,4 +42,19 @@ class UpdateProductForm(ModelForm):
     class Meta:
         model = Product
         fields = ['received_quantity'] 
+
+
+class UserCreation(UserCreationForm):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+
+    def save(self,commit = True):
+        user = super(UserCreationForm, self).save(commit = False)
+        if commit:
+            user.is_active = True
+            user.is_staff = True
+            user.save()
+        return user
+
 

@@ -43,6 +43,9 @@ INSTALLED_APPS = [
     'django_filters',
 ]
 
+AUTH_USER_MODEL = 'kgl_app.UserProfile'
+
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -131,5 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #configuring django to use crispy forms
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
+
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = 'home'
 
 

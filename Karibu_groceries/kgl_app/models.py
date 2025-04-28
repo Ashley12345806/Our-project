@@ -1,8 +1,28 @@
-from django.db import models
-from datetime import datetime
-from django.core.exceptions import ValidationError
+# kgl_app/models.py
 
-# Create your models here.
+from django.contrib.auth.models import AbstractUser
+from django.utils import timezone
+from django.db import models
+from django.core.exceptions import ValidationError
+from datetime import datetime
+
+
+class UserProfile(AbstractUser):
+    is_salesagent = models.BooleanField(default=False)
+    is_manager = models.BooleanField(default=False)
+    is_owner = models.BooleanField(default=False)
+    address = models.CharField(blank=True, max_length=50)
+    phonenumber = models.CharField(blank=True, max_length=20)
+    gender = models.CharField(
+        blank=True,
+        max_length=20,
+        choices=[('Female', 'Female'), ('Male', 'Male')]
+    )
+
+    def __str__(self):
+        return self.username
+
+
 class Product(models.Model):
     
     product_name=models.CharField(max_length=50, blank=False, default='')
@@ -73,6 +93,7 @@ class Deffered_payment(models.Model):
         #check if nin is valid
         if not self.nin:
             raise ValidationError("NIN is required.")
+        
 
 
 

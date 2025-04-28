@@ -8,7 +8,7 @@ body {
 }
 
 .navbar {
-    background-color: #2d4d38;
+    background-color: #bdcfc3;
 }
 
 .navbar-brand {
@@ -18,7 +18,7 @@ body {
 }
 
 .btn-warning {
-    background-color: #e85d04;
+    background-color: #ef5807;
     border: none;
 }
 
@@ -86,7 +86,7 @@ h1 {
 }
 
 .bg-success {
-    background-color: #41654a !important;
+    background-color: #67866f !important;
 }
 
 .bg-danger {

@@ -27,7 +27,8 @@ urlpatterns = [
     path('', views.home, name='index'),
     path('home/', views.index, name='home'),
     path('sales/', views.sales, name='sales'),
-    path('login/', auth_views.LoginView.as_view(template_name='kgl_app/login.html'), name='login'),
+    path('', auth_views.LoginView.as_view(template_name='kgl_app/login.html'), name='login'),
+    path('login/',views.Login,name='login'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('managerdashboard/', views.managerdashboard, name='managerdashboard'),
     path('logout/', views.logout, name='logout'),
@@ -41,5 +42,7 @@ urlpatterns = [
     path('addproduct/<int:pk>/', views.addproduct, name='addproduct'), 
     path('deferredpaymentlist/',views.deferredpaymentlist, name ='deferredpaymentlist'),
     path('deferredpayment/', views.deferredpayment, name='deferredpayment'),
+    path('signup/', views.signup, name='signup'),
+    
   
 ]
