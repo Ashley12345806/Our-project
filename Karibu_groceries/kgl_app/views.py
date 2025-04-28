@@ -1,77 +1,179 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect,get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from .filters import ProductFilter
+#access the models in the database
 from kgl_app.models import *
+from kgl_app.forms import *
+from django.db.models import Sum
+
 
 
 # Create your views here.
-def index(request):
-    return render(request, "kgl_app/home.html")
-
-
 def home(request):
+    return render(request, "kgl_app/index.html")
+
+
+def index(request):
     #get all products from the database and order them by id
     products = Product.objects.all().order_by('id')
-    return render(request, "kgl_app/index.html", {'products': products})
+    return render(request, "kgl_app/home.html", {'products': products})
+
+def product_detail(request, product_id):
+    product = get_object_or_404(Product, id=product_id)
+    return render(request, 'kgl_app/productdetail.html', {'product': product})
+
+def delete_product(request, product_id):
+    product = Product.objects.get(id=product_id)
+    product.delete()
+    return HttpResponseRedirect(reverse('products'))
+
+def issue_item(request, pk):
+    #accessing products from the stock model
+    issued_product = Product.objects.get(id=pk)
+    #accessing our form
+    sales_form = SaleForm(request.POST )
+    if request.method == 'POST':
+        #checking if the form is valid
+        if sales_form.is_valid():
+            new_sale = sales_form.save(commit = False)
+            new_sale.product = issued_product.product_name
+            new_sale.unit_price = issued_product.unit_price
+            new_sale.save()
+            #keep track of sales reamaining after sales
+            issued_quantity =int(request.POST['quantity'])
+            issued_product.total_quantity -=  issued_quantity
+            issued_product.save()
+
+
+            return redirect('receipt')
+    return render(request, "kgl_app/issue_item.html", {'sales_form': sales_form})    
+
+   
+
 
 def sales(request):
-    return render(request, "kgl_app/sales.html")
+    sales = Sale.objects.all().order_by('id')
+    total_expected = sum([products.get_total() or 0 for products in sales])
+    total = sum([products.amount_received or 0 for products in sales])
+    total_change = sum([products.get_change() or 0 for products in sales])
+    net = total_expected - total
+    return render(request, "kgl_app/sales.html",{'sales': sales, 'total_expected': total_expected, 'total': total, 'total_change': total_change, 'net': net})
 
-def signup(request):
-    return render(request, "kgl_app/signup.html")
 
 
 def login(request):
     return render(request, "kgl_app/login.html")
+from django.db.models import Sum
+from .models import Sale, Product
 
 def dashboard(request):
-    return render(request, "kgl_app/dashboard.html")
+    total_sales = Sale.objects.aggregate(total=Sum('amount_received'))['total'] or 0
+    total_receipts = Sale.objects.count()
+    total_products = Product.objects.count()
+    total_branches = Product.objects.values('branch_name').distinct().count()
+
+    context = {
+        'total_sales': total_sales,
+        'total_receipts': total_receipts,
+        'total_products': total_products,
+        'total_branches': total_branches,
+    }
+    return render(request, 'kgl_app/dashboard.html', context)
+
+
+def managerdashboard(request):
+    total_sales = Sale.objects.aggregate(total=Sum('amount_received'))['total'] or 0
+    total_receipts = Sale.objects.count()  # each sale is a receipt
+    total_products = Product.objects.count()
+
+    context = {
+        'total_sales': total_sales,
+        'total_receipts': total_receipts,
+        'total_products': total_products,
+    }
+    return render(request, "kgl_app/managerdashboard.html", context)
+
 
 
 def logout(request):
     return render(request, "kgl_app/logout.html")
 
 
-def addproduct(request):
-    return render(request, "kgl_app/addproduct.html")
+def addproduct(request, pk):
+    issued_product = Product.objects.get(id=pk)
+    #accessing our form
+    form = UpdateProductForm(request.POST)
+    if request.method == 'POST':
+        #checking if the form is valid
+        if form.is_valid():
+            added_quantity = int(request.POST.get('received_quantity'))
+            issued_product.total_quantity += added_quantity
+            issued_product.save()
+            #to add the remaining quantity to the stock
+            print(added_quantity)
+            print(issued_product.total_quantity)
+            return redirect('home')
+    return render(request, "kgl_app/addproduct.html", {'form': form, 'issued_product': issued_product})
 
 
 def deferredpayment(request):
-    payment = Deffered_payment.objects.all()
-    if request.method == 'POST':
-        customer_name = request.POST.get('customer_name')
-        contact = request.POST.get('contact')
-        address = request.POST.get('address')
-        nin = request.POST.get('nin')
-        product_name = request.POST.get('product_name')
-        amount = request.POST.get('amount')
-        balance = request.POST.get('balance')
-        duedate = request.POST.get('duedate')
-        date_of_payment = request.POST.get('date_of_payment')
-        branch = request.POST.get('branch')
-        sales_agent = request.POST.get('sales_agent')
+  if request.method == 'POST':
+       form = DefferedPaymentForm(request.POST)
+       if form.is_valid():
+           form.save()
+           # Redirect on successful form submission
+           return redirect('home')
+       else:
+         # If the form is not valid, return the form with errors
+           return render(request, 'kgl_app/deferredpayment.html', {'form': form})
+  else:
+         form = DefferedPaymentForm()
+# Always return a response in case of GET request or invalid form
+  return render(request, "kgl_app/deferredpayment.html" , {'form': form})
 
-        Deffered_payment.objects.create(
-            customer_name=customer_name,
-            contact=contact,
-            address=address,
-            nin=nin,
-            product_name=product_name,
-            amount=amount,
-            balance=balance,
-            duedate=duedate,
-            date_of_payment=date_of_payment,
-            branch=branch,
-            sales_agent=sales_agent
-        )
-    return render(request, "kgl_app/deferredpayment.html" , {'payment': payment})
 
 def deferredpaymentlist(request):
-    return render(request, 'kgl_app/deferredpaymentlist.html')
+    payment = Deffered_payment.objects.all().order_by('id')
+    return render(request, 'kgl_app/deferredpaymentlist.html', {'payments': payment})
 
 
 def addsale(request):
     return render(request, "kgl_app/addsale.html")
 
+
+
 def receipt(request):
-    return render(request, "kgl_app/receipt.html")
+    sales = Sale.objects.all().order_by('id')
+    return render(request, "kgl_app/receipt.html", {'sales': sales})
+
+def receipt_detail(request, receipt_id):
+    receipt = Sale.objects.get(id=receipt_id)
+    return render(request, "kgl_app/receipt_detail.html", {'receipt': receipt})
+
+
+def add_to_stock(request,pk):
+    issued_product = Product.objects.get(id=pk)
+    form = AddForm(request.POST)
+    if request.method == 'POST':
+        #checking if the form is valid
+        if form.is_valid():
+            added_quantity = int(request.POST.get('total_quantity'))
+            issued_product.total_quantity += added_quantity
+            issued_product.save()
+            #to add the remaining quantity to the stock
+            print(added_quantity)
+            print(issued_product.total_quantity)
+            return redirect('home')
+    return render(request, "kgl_app/add_to_stock.html", {'form': form})
+
+def products(request):
+    products = Product.objects.all().order_by('id')
+    # Filter products based on the search query if it exists
+    product_filters =ProductFilter(request.GET, queryset=products)
+    products = product_filters.qs
+    return render(request, "kgl_app/products.html", {'products': products, 'product_filters': product_filters})
+
+
 
 

@@ -2,16 +2,43 @@
 from django.forms import ModelForm
 #accsessing our models to create corresponding forms
 from .models import *
+from .models import Deffered_payment
+from django.contrib.auth.models import User
+from django import forms
 
 class ProductForm(ModelForm):
     class Meta:
         model = Product
-        fields = ['product_name', 'branch_name', 'product_type', 'time_of_produce', 'stock_contact', 'source', 'cost', 'unit_cost', 'unit_price', 'quantity', 'issued_quantity', 'date']
+        fields = ['product_name', 'branch_name', 'product_type', 'time_of_produce', 'stock_contact', 'source', 'cost', 'unit_cost', 'unit_price', 'total_quantity', 'issued_quantity']
         #fields = '__all__'
 
 
 class SaleForm(ModelForm):
+    branch_name = models.CharField(max_length=100, null=True, blank=True)
+    customer_name = models.CharField(max_length=50, null=True, blank=True)
+    quantity = models.FloatField(default=1, null=True, blank=True)
+    unit_price = models.FloatField(default=10, null=True, blank=True)
+    amount_received = models.IntegerField(default=10, null=True, blank=True)
     class Meta:
         model = Sale
-        fields = ['product_name', 'branch_name', 'quantity', 'amount_received', 'issued_to', 'salesagent', 'unit_price', 'date', 'time']
+        fields = ['product', 'branch_name', 'quantity', 'amount_received', 'customer_name', 'salesagent', 'unit_price']
         #fields = '__all__'       
+
+
+class DefferedPaymentForm(ModelForm):
+    class Meta:
+        model = Deffered_payment
+        fields = ['customer_name', 'contact', 'address', 'nin', 'product_name', 'quantity', 'amount_due', 'balance', 'duedate', 'date_of_payment', 'branch_name', 'salesagent']
+        #fields = '__all__' 
+
+class AddForm(ModelForm):
+    total_quantity = models.FloatField(default=1, null=True, blank=True)
+    class Meta:
+        model = Product
+        fields = ['total_quantity']
+
+class UpdateProductForm(ModelForm):
+    class Meta:
+        model = Product
+        fields = ['received_quantity'] 
+

@@ -1,21 +1,23 @@
 from django.db import models
 from datetime import datetime
+from django.core.exceptions import ValidationError
 
 # Create your models here.
 class Product(models.Model):
     
-    product_name=models.CharField(max_length=50, null = True, blank=True)
-    branch_name=models.CharField(max_length=50, null = True, blank=True)
+    product_name=models.CharField(max_length=50, blank=False, default='')
+    branch_name=models.CharField(max_length=50,  blank=True, null=True)
     product_type=models.CharField(max_length=50, null = True, blank=True)
     time_of_produce=models.CharField(max_length=50, null = True, blank=True)
     stock_contact=models.CharField(max_length=50, null = True, blank=True)
-    source = models.CharField(max_length=50, null = True, blank=True)
-    cost = models.FloatField(default=0, null = True, blank=True)
-    unit_cost = models.FloatField(default=10, null = True, blank=True)
-    unit_price = models.FloatField(default=0, null = True, blank=True)
-    quantity = models.FloatField(default=0, null = True, blank=True)
-    issued_quantity = models.FloatField(default=0, null = True, blank=True)
-    date = models.DateField(default=datetime.now)
+    source = models.CharField(max_length=50, default='',blank=False)
+    cost = models.FloatField(default=0, null = False, blank=False)
+    unit_cost = models.FloatField(default=10, null = False, blank=False)
+    unit_price = models.FloatField(default=0, null = False, blank=False)
+    total_quantity = models.FloatField(default=0, null = False, blank=False)
+    received_quantity = models.FloatField(default=0, null = False, blank=False)
+    issued_quantity = models.FloatField(default=0, null = False, blank=False)
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self):
         return self.product_name
@@ -24,17 +26,30 @@ class Product(models.Model):
 
 
 class Sale(models.Model):
-    product_name = models.CharField(max_length=50, null=True, blank=True)
-    branch_name = models.CharField(max_length=100, null=True, blank=True)
-    quantity = models.FloatField(default=10, null=True, blank=True)
-    amount_received = models.IntegerField(default=10, null=True, blank=True)
-    issued_to = models.CharField(max_length=50, null=True, blank=True)
-    salesagent = models.CharField(max_length=50, null=True, blank=True)
-    unit_price = models.FloatField(default=10, null=True, blank=True)
-    date = models.DateField(default=datetime.now)
-    time = models.TimeField(default=datetime.now)
+    product = models.CharField(max_length=50,  blank=False, default='')
+    branch_name = models.CharField(max_length=100, blank=False, null=False, default='')
+    quantity = models.FloatField(default=10, null=False, blank=False)
+    amount_received = models.IntegerField(default=10, null=False, blank=False)
+    customer_name = models.CharField(max_length=50, null=False, blank=False, default='')
+    salesagent = models.CharField(max_length=50, null=False, blank=False, default='')
+    unit_price = models.FloatField(default=10, null=False, blank=False)
+    date = models.DateField(auto_now_add=True)
+    time = models.TimeField(auto_now_add=True)
 
 
+    #getting the total amount of the sale
+    def get_total(self):
+        total = self.quantity * self.unit_price
+        return int(total)
+    
+    #getting change
+    def get_change(self):
+        change = self.get_total() - self.amount_received
+        return abs(int(change))
+    
+    def __str__(self):
+        return self.product
+    
 
 class Deffered_payment(models.Model):
     customer_name = models.CharField(max_length=25, null=True, blank=True)
@@ -53,6 +68,11 @@ class Deffered_payment(models.Model):
 
     def __str__(self):
         return self.customer_name
+    
+    def clean(self):
+        #check if nin is valid
+        if not self.nin:
+            raise ValidationError("NIN is required.")
 
 
 

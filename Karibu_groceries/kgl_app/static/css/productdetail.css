@@ -1,0 +1,115 @@
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: #c2d9f1;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #000;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.navbar {
+  background-color: #4dabf7;
+}
+
+.navbar-nav .nav-link {
+  color: #fff;
+  font-weight: 500;
+}
+
+.navbar-nav .nav-link:hover {
+  color: #d9edf7;
+}
+
+.container {
+  flex: 1;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card {
+  background: #ffffff;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  padding: 20px;
+  width: 100%;
+  max-width: 700px; /* ADJUSTED: not too wide */
+}
+
+.card-header {
+  background-color: #4dabf7;
+  color: #ffffff;
+  font-size: 1.5rem;
+  font-weight: 600;
+  text-align: center;
+  border-radius: 12px 12px 0 0;
+}
+
+.card-body h5 {
+  color: #000;
+}
+
+.details-section {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.details-section .row div {
+  margin-bottom: 10px;
+}
+
+.btn-custom {
+  padding: 8px 20px;
+  font-size: 1rem;
+  border-radius: 30px;
+  font-weight: 500;
+}
+
+.btn-primary {
+  background-color: #4dabf7;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #339af0;
+}
+
+.btn-success {
+  background-color: #28a745;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #218838;
+}
+
+.btn-dark {
+  background-color: #000;
+  border: none;
+}
+
+.btn-dark:hover {
+  background-color: #333;
+}
+
+.back-button {
+  margin-top: 20px;
+}
+
+.footer {
+  background-color: #000;
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 0.9rem;
+  margin-top: auto;
+}
