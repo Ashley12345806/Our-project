@@ -57,7 +57,7 @@ def issue_item(request, pk):
 
    
 
-
+@login_required
 def sales(request):
     sales = Sale.objects.all().order_by('id')
     total_expected = sum([products.get_total() or 0 for products in sales])
@@ -121,7 +121,7 @@ def managerdashboard(request):
     return render(request, "kgl_app/managerdashboard.html", context)
 
 
-
+@login_required
 def logout(request):
     return render(request, "kgl_app/logout.html")
 
@@ -168,16 +168,18 @@ def addsale(request):
     return render(request, "kgl_app/addsale.html")
 
 
-
+@login_required
 def receipt(request):
     sales = Sale.objects.all().order_by('id')
     return render(request, "kgl_app/receipt.html", {'sales': sales})
 
+
+@login_required
 def receipt_detail(request, receipt_id):
     receipt = Sale.objects.get(id=receipt_id)
     return render(request, "kgl_app/receipt_detail.html", {'receipt': receipt})
 
-
+@login_required
 def add_to_stock(request,pk):
     issued_product = Product.objects.get(id=pk)
     form = AddForm(request.POST)
@@ -193,6 +195,8 @@ def add_to_stock(request,pk):
             return redirect('home')
     return render(request, "kgl_app/add_to_stock.html", {'form': form})
 
+
+@login_required
 def products(request):
     products = Product.objects.all().order_by('id')
     # Filter products based on the search query if it exists
@@ -214,4 +218,6 @@ def signup(request):
     return render(request, 'kgl_app/signup.html', {'form': form, 'title': 'Sign Up'})
 
 
-
+def log_out(request):
+    logout(request)
+    return redirect('/')

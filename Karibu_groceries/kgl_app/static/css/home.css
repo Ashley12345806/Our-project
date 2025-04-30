@@ -1,14 +1,14 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #48564b 0%, #2d4d38 100%);
+    background: linear-gradient(135deg, hsla(26, 8%, 83%, 0.854) 0%, #a38686 100%);
     min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 .navbar {
-    background-color: #bdcfc3;
+    background-color: #0f100f;
 }
 
 .navbar-brand {

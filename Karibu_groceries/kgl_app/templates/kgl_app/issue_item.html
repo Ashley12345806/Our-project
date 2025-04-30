@@ -16,17 +16,20 @@
   {% block content %}
   <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="container-fluid">
-      <span class="navbar-brand">Karibu Groceries</span>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav ms-auto">
+      <h1 class="navbar-brand fw-bold text-white">KARIBU GROCERIES LIMITED</h1>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
           <li class="nav-item">
             <a class="nav-link active" href="/home/">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/products/">Products</a>
+            <a class="nav-link" href="/sales/">Sales</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/sales/">Sales</a>
+            <a class="nav-link" href="/products/">Products</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/logout/">Logout</a>
@@ -68,8 +71,9 @@
   <div class="footer">
     &copy; 2025 Karibu Groceries Ltd. All rights reserved.
   </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    crossorigin="anonymous"></script>
 </body>
 
 </html>

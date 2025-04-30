@@ -1,11 +1,13 @@
 body {
-    background: linear-gradient(to right, #6a11cb, #2575fc);
+    background: linear-gradient(to right, #d1dfed, #d1dfed);
     min-height: 100vh;
     font-family: 'Poppins', sans-serif;
 }
 
 .navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #c7e3e8;
+    box-shadow: 0 4px 6px rgb(255, 255, 255);
+
 }
 
 .card {
@@ -13,9 +15,10 @@ body {
     background: #ffffff;
 }
 
+
 h2 {
     font-weight: bold;
-    color: #333;
+    color: #000000;
 }
 
 #signup-form input[type="submit"] {

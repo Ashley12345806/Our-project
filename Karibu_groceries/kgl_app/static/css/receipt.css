@@ -1,8 +1,6 @@
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(to right, #e0f2e9, #c8e5d9); /* soft fresh green */
-    margin: 0;
-    padding: 20px;
+    background-color: #d1dfed;
 }
 
 h1 {
@@ -29,7 +27,7 @@ h1 {
 }
 
 .highlight {
-    color: #d84315; /* Vibrant orange */
+    color: #000;
     font-weight: bold;
 }
 
@@ -55,4 +53,13 @@ input[type="submit"]:hover {
 
 .row {
     margin-bottom: 20px;
+}
+footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 0.9rem;
+  
+
 }
