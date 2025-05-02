@@ -39,10 +39,10 @@ class Product(models.Model):
     issued_quantity = models.FloatField(default=0, null = False, blank=False)
     date = models.DateField(auto_now_add=True)
 
+
     def __str__(self):
         return self.product_name
     
-
 
 
 class Sale(models.Model):

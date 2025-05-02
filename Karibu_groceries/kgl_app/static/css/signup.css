@@ -6,24 +6,41 @@ body {
 
 .navbar {
     background-color: #c7e3e8;
-    box-shadow: 0 4px 6px rgb(255, 255, 255);
-
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.5);
 }
 
 .card {
     border-radius: 1rem;
     background: #ffffff;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
-
 
 h2 {
     font-weight: bold;
     color: #000000;
+    font-size: 1.3rem; /* Further reduced heading size */
+}
+
+#signup-form .form-control {
+    border-radius: 6px; /* Slightly smaller border radius */
+    font-size: 0.85rem; /* Reduced input text size */
+    padding: 0.4rem; /* Further reduced padding for compact inputs */
+    border: 1px solid #ced4da;
+}
+
+#signup-form .form-label {
+    font-size: 0.8rem; /* Further reduced label size */
+    color: #333;
+    margin-bottom: 0.2rem; /* Reduced label spacing */
 }
 
 #signup-form input[type="submit"] {
     background-color: #2575fc;
     border: none;
+    border-radius: 6px;
+    font-size: 0.85rem; /* Smaller button text */
+    padding: 0.4rem 0.8rem; /* Reduced button padding */
+    transition: background-color 0.3s ease;
 }
 
 #signup-form input[type="submit"]:hover {
@@ -32,4 +49,30 @@ h2 {
 
 .btn-outline-primary, .btn-outline-danger {
     border-radius: 50px;
+}
+
+/* Ensure dropdowns (like gender) are styled consistently */
+#signup-form select.form-control {
+    height: 34px; /* Slightly smaller dropdown height */
+    font-size: 0.85rem;
+}
+
+/* Adjust crispy forms helper text */
+#signup-form .helptext {
+    font-size: 0.7rem; /* Smaller helper text */
+    color: #6c757d;
+    margin-top: 0.1rem; /* Reduced helper text spacing */
+}
+
+/* Reduce spacing between form fields */
+#signup-form .mb-3 {
+    margin-bottom: 0.5rem !important; /* Reduced field spacing */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        max-width: 350px; /* Smaller on mobile */
+    }
 }

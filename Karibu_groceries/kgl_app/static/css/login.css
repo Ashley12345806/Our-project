@@ -1,5 +1,5 @@
 body {
-  background-color:  #d1dfed; /* earthy green to warm brown */
+  background-color:  #d1dfed;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,7 +16,7 @@ body {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  color: #000;
 }
 
 
@@ -24,33 +24,33 @@ h3 {
   text-align: center;
   font-size: 2rem;
   font-family: 'Poppins', sans-serif;
-  color: #ffffff;
+  color: #000;
   margin-bottom: 1.5rem;
   text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
 
 .form-group label {
   font-weight: 600;
-  color: #ffffff;
+  color: #000;
 }
 
 .form-control {
   background-color: rgba(255, 255, 255, 0.3) !important;
-  color: #fff !important;
+  color: #000 !important;
 }
 
 
 .form-control::placeholder {
-  color: #f1f1f1;
+  color: #000;
 }
 
 .form-check-label {
-  color: #f0f0f0;
+  color: #000;
 }
 
 button {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #8aadd0;
   color: #3c4045;
   padding: 12px 20px;
   font-weight: bold;
@@ -60,10 +60,6 @@ button {
   transition: background-color 0.3s, transform 0.2s;
 }
 
-button:hover {
-  background-color: #f3f3f3;
-  transform: scale(1.05);
-}
 
 footer {
   text-align: center;

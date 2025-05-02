@@ -1,0 +1,90 @@
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+    /* Light background */
+    color: #333;
+    /* Dark text */
+  }
+
+  /* Navbar */
+  .navbar {
+    background: linear-gradient(135deg, #5D5CDE, #7A79E8);
+    /* Gradient background */
+  }
+
+  .navbar .nav-link {
+    color: #f8f9fa;
+    margin-right: 1rem;
+    transition: color 0.3s;
+  }
+
+  .navbar .nav-link:hover {
+    color: #ffc107;
+  }
+
+  /* Form container */
+.form-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem; /* Reduced padding */
+}
+
+/* Form card */
+.form-card {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    max-width: 550px; /* Reduced width */
+    width: 100%;
+    padding: 1rem; /* Reduced padding */
+    color: #000;
+}
+
+/* Form heading */
+.form-card h2 {
+    text-align: center;
+    margin-bottom: 0.8rem; /* Reduced spacing */
+    color: #5D5CDE;
+    font-weight: bold;
+    font-size: 1.2rem; /* Smaller heading */
+}
+
+/* Form fields */
+.form-card .form-control,
+.form-card .form-select {
+    font-size: 11px; /* Reduced text size */
+    border-radius: 6px;
+    padding: 0.3rem;
+    height: 28px; /* Reduced height */
+}
+
+/* Button group */
+.btn-group-centered {
+    display: flex;
+    justify-content: center;
+    gap: 0.8rem;
+    margin-top: 1rem; /* Reduced space */
+}
+
+.btn-submit {
+    min-width: 90px; /* Smaller buttons */
+    font-size: 11px; /* Reduced text size */
+    padding: 0.3rem 0.8rem;
+    border-radius: 18px;
+}
+
+  /* Footer */
+  .footer {
+    background: rgba(0, 0, 0, 0.85);
+    text-align: center;
+    padding: 1rem;
+    color: #dee2e6;
+    font-size: 0.9rem;
+    margin-top: auto;
+  }

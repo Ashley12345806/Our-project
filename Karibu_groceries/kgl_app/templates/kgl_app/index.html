@@ -1,39 +1,58 @@
-{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" {% if dark_mode %}class="dark"{% endif %}>
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-    <title>Home - Karibu Groceries</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <title> Karibu Groceries</title>
     <style>
+        :root {
+            --primary-color: #5D5CDE;
+            --secondary-color: #FF9F67;
+            --light-bg: #FFFFFF;
+            --dark-bg: #181818;
+            --dark-text: #F5F5F5;
+            --border-radius: 8px;
+            --black: #000000;
+            --orange: #FF6200;
+        }
+
         body {
-            background-image: url('/static/images/shop.jpg');
+            background-image: url('/static/images/yeye.jpg');
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
+            background-color: #d1dfed;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Poppins', sans-serif;
             overflow: hidden;
+            position: relative;
+        }
+
+        html.dark body {
+            background-color: var(--dark-bg);
+            color: var(--dark-text);
         }
 
         .card {
             width: 32rem;
             padding: 2rem;
             border-radius: 20px;
-            background: rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            background: rgba(0, 0, 0, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            border: 1px solid var(--primary-color);
             color: #ffffff;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -56,35 +75,73 @@
             margin-bottom: 2rem;
         }
 
-        .btn-primary {
-            background-color: #d95427;
-            border: none;
-            font-size: 1rem;
-            padding: 0.5rem 1rem;
+        .button {
+            background-color: var(--black);
+            color: white;
             border-radius: 30px;
-            width: 150px;
-            /* fixed smaller width */
+            padding: 0.5rem 1.2rem;
             text-align: center;
-            margin-top: 1rem;
-            transition: background-color 0.3s, transform 0.3s;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
         }
 
-        .btn-primary:hover {
-            background-color: #c13d1a;
-            transform: scale(1.1);
+        .button:hover {
+            background-color: #333333;
+        }
+
+        footer {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background-color: #d1dfed;
+            color: #333;
+            text-align: center;
+            padding: 1rem 0;
+            font-size: 0.9rem;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        html.dark footer {
+            background-color: #242424;
+            color: var(--dark-text);
+        }
+
+        footer .row {
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Top Decorator */
+        .decorator {
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+            height: 4px;
+            background: var(--primary-color);
         }
     </style>
 </head>
 
 <body>
+    <div class="decorator"></div>
     <div class="card">
-        <h5 class="card-title">Welcome to Karibu Groceries!</h5>
+        <h5 class="card-title"><i class="fas fa-shopping-basket me-2"></i>Welcome to Karibu Groceries!</h5>
         <p class="card-text">Your one-stop shop for fresh products. Join us and explore more!</p>
-        <a href="/home/" class="btn btn-primary mx-auto">Get Started</a>
+        <a href="/home/" class="button mx-auto">Get Started</a>
     </div>
+    <footer>
+        <div class="row align-items-center justify-content-center">
+            <div class="col-auto">
+                <i class="fas fa-shopping-basket text-primary me-2"></i>
+                © 2025 Karibu Groceries Ltd - Made with <span class="text-danger">❤</span> by Lillian Nakato
+            </div>
+        </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
 </body>
-
 </html>

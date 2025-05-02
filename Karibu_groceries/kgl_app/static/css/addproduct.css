@@ -1,0 +1,155 @@
+:root {
+    --primary-color: #5D5CDE;
+    --secondary-color: #FF9F67;
+    --light-bg: #FFFFFF;
+    --dark-bg: #181818;
+    --dark-text: #F5F5F5;
+    --border-radius: 8px;
+    --black: #000000;
+    --orange: #FF6200;
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #d1dfed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+html.dark body {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+.navbar {
+    background-color: var(--primary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #f8f9fa;
+}
+
+.nav-link {
+    color: #f8f9fa !important;
+    font-weight: 500;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--secondary-color) !important;
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #d1dfed;
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--primary-color);
+}
+
+html.dark .form-container {
+    background-color: #242424;
+    color: var(--dark-text);
+}
+
+.form-container h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+html.dark .form-container h1 {
+    color: var(--dark-text);
+}
+
+.form-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-container .form-group {
+    margin-bottom: 15px;
+}
+
+.form-container label {
+    font-weight: 500;
+    color: #333;
+}
+
+html.dark .form-container label {
+    color: var(--dark-text);
+}
+
+.form-container input,
+.form-container select,
+.form-container textarea {
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    padding: 8px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+html.dark .form-container input,
+html.dark .form-container select,
+html.dark .form-container textarea {
+    background-color: #333;
+    color: var(--dark-text);
+    border-color: #555;
+}
+
+.form-container .btn {
+    background-color: var(--black);
+    color: white;
+    border-radius: 30px;
+    padding: 10px 20px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+    align-self: center;
+}
+
+.form-container .btn:hover {
+    background-color: #333333;
+}
+
+footer {
+    background-color: #d1dfed;
+    color: #333;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    font-size: 0.9rem;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+html.dark footer {
+    background-color: #242424;
+    color: var(--dark-text);
+}
+
+footer .row {
+    align-items: center;
+    justify-content: center;
+}
+
+/* Top Decorator */
+.decorator {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--primary-color);
+}

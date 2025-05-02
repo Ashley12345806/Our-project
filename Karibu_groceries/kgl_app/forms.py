@@ -47,14 +47,24 @@ class UpdateProductForm(ModelForm):
 class UserCreation(UserCreationForm):
     class Meta:
         model = UserProfile
-        fields = '__all__'
+        fields = [
+            'username', 
+            'email', 
+            'password1', 
+            'password2', 
+            'address', 
+            'phonenumber', 
+            'gender', 
+            'is_salesagent', 
+            'is_manager', 
+            'is_owner'
+        ]
 
-    def save(self,commit = True):
-        user = super(UserCreationForm, self).save(commit = False)
+    def save(self, commit=True):
+        user = super(UserCreation, self).save(commit=False)
         if commit:
             user.is_active = True
             user.is_staff = True
             user.save()
         return user
-
 

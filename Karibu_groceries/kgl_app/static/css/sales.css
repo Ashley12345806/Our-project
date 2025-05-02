@@ -1,55 +1,418 @@
+:root {
+  --primary-color: #5D5CDE;
+  --secondary-color: #FF9F67;
+  --accent-color: #FFD9A6;
+  --light-bg: #FFFFFF;
+  --dark-bg: #181818;
+  --dark-text: #F5F5F5;
+  --card-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --border-radius: 12px;
+}
+
 body {
-    background-color:#c2d9f1;
-    font-family: 'Arial', sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+html.dark body {
+  background-color: var(--dark-bg);
+  color: var(--dark-text);
+}
+
+/* Navbar styling */
+.navbar {
+  background: linear-gradient(135deg, var(--primary-color), #7A79E8) !important;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  padding: 12px 0;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+.nav-link {
+  font-weight: 500;
+  margin: 0 5px;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--secondary-color);
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* Page decorator */
+.decorator {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
+  height: 5px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color), var(--primary-color));
+  z-index: 1000;
+}
+
+/* Page header styling */
+.sales-header {
+  margin: 30px 0;
+  position: relative;
+  text-align: center;
+}
+
+.sales-header h1 {
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+  font-size: 2.2rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.sales-header h1 i {
+  margin-right: 12px;
+  color: var(--secondary-color);
+}
+
+.sales-header p {
+  color: #777;
+  font-size: 1.1rem;
+}
+
+/* Summary cards */
+.summary-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  height: 100%;
+  transition: transform 0.3s, box-shadow 0.3s;
+  position: relative;
+  overflow: hidden;
+  border: none;
+}
+
+.summary-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+.summary-card .card-decoration {
+  position: absolute;
+  height: 5px;
+  width: 100%;
+  top: 0;
+  left: 0;
+}
+
+.summary-card:nth-child(1) .card-decoration {
+  background-color: #4EC1FF;
+}
+
+.summary-card:nth-child(2) .card-decoration {
+  background-color: #FF7D7D;
+}
+
+.summary-card:nth-child(3) .card-decoration {
+  background-color: #69DE91;
+}
+
+.summary-card:nth-child(4) .card-decoration {
+  background-color: #FFB545;
+}
+
+.summary-card .card-body {
+  padding: 25px 20px;
+  text-align: center;
+}
+
+.summary-card .card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 15px;
+  display: inline-block;
+}
+
+.summary-card:nth-child(1) .card-icon {
+  color: #4EC1FF;
+}
+
+.summary-card:nth-child(2) .card-icon {
+  color: #FF7D7D;
+}
+
+.summary-card:nth-child(3) .card-icon {
+  color: #69DE91;
+}
+
+.summary-card:nth-child(4) .card-icon {
+  color: #FFB545;
+}
+
+.summary-card .card-title {
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 15px;
+  color: #555;
+}
+
+.summary-card .card-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #444;
+  margin: 0;
+}
+
+/* Sales details section */
+.section-title {
+  margin: 40px 0 30px;
+  text-align: center;
+  font-weight: 700;
+  color: var(--primary-color);
+  position: relative;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 8px;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  width: 60%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  bottom: 0;
+  left: 20%;
+  border-radius: 2px;
+}
+
+/* Sales detail cards - new adorable style */
+.sale-card {
+  background-color: white;
+  border-radius: var(--border-radius);
+  box-shadow: var(--card-shadow);
+  height: 100%;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.sale-card:hover {
+  transform: translateY(-5px);
+}
+
+.sale-card .card-header {
+  background: linear-gradient(135deg, var(--primary-color), #7A79E8);
+  color: white;
+  text-align: center;
+  padding: 15px;
+  position: relative;
+}
+
+.sale-card .card-header h5 {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.sale-card .card-header .customer-icon {
+  position: absolute;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.1rem;
+}
+
+.sale-card .card-header .receipt-link {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.sale-card .card-header .receipt-link:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.sale-card .card-body {
+  padding: 20px;
+}
+
+.sale-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.sale-detail-item {
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.sale-detail-item:hover {
+  background-color: #f0f0ff;
+}
+
+.detail-label {
+  font-size: 0.8rem;
+  color: #777;
+  margin-bottom: 5px;
+  display: block;
+}
+
+.detail-value {
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 1.1rem;
+}
+
+.sale-product {
+  background-color: rgba(93, 92, 222, 0.1);
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin: 0 0 15px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sale-product i {
+  margin-right: 8px;
+  color: var(--primary-color);
+}
+
+.sale-product span {
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.sale-balance {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.sale-balance .balance-label {
+  font-weight: 600;
+  color: #777;
+}
+
+.sale-balance .balance-value {
+  font-weight: 700;
+  color: var(--secondary-color);
+  font-size: 1.1rem;
+}
+
+/* Footer styling */
+footer {
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 50px;
+  background-color: #7A79E8;
+  border-radius: var(--border-radius) var(--border-radius) 0 0;
+  box-shadow: 0 -3px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  color: #000;
+}
+
+footer p {
+  margin: 0;
+  font-weight: 500;
   
+}
+
+/* Dark mode support */
+html.dark .summary-card,
+html.dark .sale-card,
+html.dark footer {
+  background-color: #242424;
+  color: var(--dark-text);
+}
+
+html.dark .summary-card .card-title {
+  color: #ddd;
+}
+
+html.dark .summary-card .card-text {
+  color: #fff;
+}
+
+html.dark .sales-header p {
+  color: #bbb;
+}
+
+/* Dark mode for new sales cards */
+html.dark .sale-card .card-header {
+  background: linear-gradient(135deg, var(--primary-color), #6261c9);
+}
+
+html.dark .sale-detail-item {
+  background-color: #2a2a2a;
+}
+
+html.dark .sale-detail-item:hover {
+  background-color: #333344;
+}
+
+html.dark .detail-label {
+  color: #aaa;
+}
+
+html.dark .sale-product {
+  background-color: rgba(93, 92, 222, 0.2);
+}
+
+html.dark .sale-balance {
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+}
+
+html.dark .sale-balance .balance-label {
+  color: #aaa;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sales-header h1 {
+    font-size: 1.8rem;
   }
 
-  .container h1 {
-    color: #000;
-    font-weight: bold;
-    margin-bottom: 30px;
+  .summary-card .card-icon {
+    font-size: 2rem;
   }
 
-  .card {
-    background: #ffffff;
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+  .summary-card .card-title {
+    font-size: 1rem;
   }
 
-  .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+  .summary-card .card-text {
+    font-size: 1.3rem;
   }
-
-  .card-body .card-title {
-    color: #000;
-    font-weight: bold;
-  }
-
-  .card-body .card-text {
-    color: #555555;
-  }
-
-  .highlight {
-    color: #000;
-    font-weight: bold;
-  }
-
-  footer {
-    margin-top: 20px;
-    padding: 20px;
-    background: #000;
-    color: #ffffff;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-  }
-
-  a {
-    text-decoration: none;
-  }
-
-  a:hover {
-    text-decoration: underline;
-  }
+}

@@ -123,7 +123,7 @@ def managerdashboard(request):
 
 @login_required
 def logout(request):
-    return render(request, "kgl_app/logout.html")
+    return redirect('/')
 
 
 def addproduct(request, pk):
@@ -196,6 +196,18 @@ def add_to_stock(request,pk):
     return render(request, "kgl_app/add_to_stock.html", {'form': form})
 
 
+def addproduct(request):
+    form = ProductForm()
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save
+            return redirect('/products')
+        else:
+            form = ProductForm()
+    return render(request,"kgl_app/addproduct.html", {'form':form})
+
+
 @login_required
 def products(request):
     products = Product.objects.all().order_by('id')
@@ -217,7 +229,3 @@ def signup(request):
         form = UserCreation()
     return render(request, 'kgl_app/signup.html', {'form': form, 'title': 'Sign Up'})
 
-
-def log_out(request):
-    logout(request)
-    return redirect('/')

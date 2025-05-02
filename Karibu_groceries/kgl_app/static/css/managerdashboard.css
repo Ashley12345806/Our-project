@@ -5,14 +5,18 @@
     --dark-bg: #181818;
     --dark-text: #F5F5F5;
     --border-radius: 8px;
+    --black: #000000;
+    --orange: #FF6200;
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #f8f9fa;
-    color: #333;
-    position: relative;
     margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #d1dfed;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
 }
 
 html.dark body {
@@ -20,98 +24,87 @@ html.dark body {
     color: var(--dark-text);
 }
 
-/* Sidebar */
 .sidebar {
     position: fixed;
     top: 0;
     left: 0;
     width: 250px;
     height: 100%;
-    background-color: #d1dfed;
+    background-color: var(--primary-color);
     padding: 20px;
+    color: #f8f9fa;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
 }
 
-html.dark .sidebar {
-    background-color: #242424;
-    color: var(--dark-text);
+.sidebar h3 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
 }
 
-.sidebar h3 {
-    font-weight: 600;
-    color: var(--primary-color);
-    margin-bottom: 20px;
+.sidebar h3 i {
+    margin-right: 10px;
+    color: var(--secondary-color);
 }
 
 .sidebar a {
     display: block;
     padding: 10px 0;
-    color: #333;
+    color: #f8f9fa;
     text-decoration: none;
     font-weight: 500;
-    transition: color 0.2s;
-}
-
-html.dark .sidebar a {
-    color: var(--dark-text);
-}
-
-.sidebar a:hover {
-    color: var(--secondary-color);
+    transition: color 0.2s, padding-left 0.2s;
 }
 
 .sidebar a i {
     margin-right: 10px;
-    color: var(--primary-color);
+}
+
+.sidebar a:hover {
+    color: var(--secondary-color);
+    padding-left: 10px;
 }
 
 .sidebar a[style*="color: #ffdddd"] {
-    color: #ff6666 !important;
+    color: #ffdddd !important;
 }
 
-html.dark .sidebar a[style*="color: #ffdddd"] {
-    color: #ff9999 !important;
+.sidebar a[style*="color: #ffdddd"]:hover {
+    color: #ffaaaa !important;
 }
 
-/* Main Content */
 .main-content {
     margin-left: 250px;
-    padding: 20px;
-    background-color: #f8f9fa;
-    min-height: 100vh;
-}
-
-html.dark .main-content {
-    background-color: var(--dark-bg);
+    padding: 40px;
+    flex-grow: 1;
 }
 
 .main-content h2 {
+    font-size: 2rem;
     font-weight: 600;
     color: var(--primary-color);
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
+    margin-bottom: 30px;
 }
 
-.main-content h2 i {
-    margin-right: 10px;
-    color: var(--secondary-color);
+html.dark .main-content h2 {
+    color: var(--dark-text);
 }
 
-/* Cards */
 .cards {
     display: flex;
-    flex-wrap: wrap;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .card {
-    flex: 1 1 200px;
     background-color: #d1dfed;
-    border: none;
     border-radius: var(--border-radius);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    flex: 1;
+    min-width: 200px;
     text-align: center;
     transition: transform 0.2s;
 }
@@ -122,30 +115,32 @@ html.dark .card {
 }
 
 .card:hover {
-    transform: translateY(-5px);
+    transform: scale(1.02);
 }
 
 .card h5 {
-    font-weight: 500;
-    color: #555;
+    font-size: 1.2rem;
+    color: var(--primary-color);
     margin-bottom: 10px;
 }
 
-html.dark .card h5 {
-    color: #ddd;
-}
-
 .card h3 {
+    font-size: 1.5rem;
     font-weight: 600;
-    color: var(--primary-color);
+    color: #000;
 }
 
-/* Footer */
+html.dark .card h3 {
+    color: var(--dark-text);
+}
+
 footer {
-    text-align: center;
-    margin-top: 30px;
-    padding: 20px;
     background-color: #d1dfed;
+    color: #333;
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    font-size: 0.9rem;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
@@ -168,31 +163,4 @@ footer .row {
     left: 0;
     height: 4px;
     background: var(--primary-color);
-}
-
-/* Responsive Adjustments */
-@media (max-width: 768px) {
-    .sidebar {
-        width: 200px;
-    }
-
-    .main-content {
-        margin-left: 200px;
-    }
-
-    .cards {
-        flex-direction: column;
-    }
-}
-
-@media (max-width: 576px) {
-    .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
 }

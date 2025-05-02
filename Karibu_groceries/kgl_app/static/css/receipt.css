@@ -1,65 +1,179 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-color: #d1dfed;
+:root {
+    --primary-color: #5D5CDE;
+    --secondary-color: #FF9F67;
+    --light-bg: #FFFFFF;
+    --dark-bg: #181818;
+    --dark-text: #F5F5F5;
+    --border-radius: 8px;
+    --black: #000000;
+    --orange: #FF6200;
 }
 
-h1 {
-    color: #2e7d32; /* Deep green */
-    font-weight: bold;
+
+html.dark body {
+    background-color: var(--dark-bg);
+    color: var(--dark-text);
+}
+
+/* Navigation */
+.navbar {
+    background: var(--primary-color) !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-weight: 500;
+    margin: 0 5px;
+    color: white !important;
+}
+
+.nav-link:hover {
+    color: var(--secondary-color) !important;
+}
+
+/* Decorator */
+.decorator {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background: var(--primary-color);
+}
+
+/* Container and Header */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1.text-center {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
     margin-bottom: 30px;
 }
 
+html.dark h1.text-center {
+    color: var(--dark-text);
+}
+
+/* Cards */
 .card {
-    background: #ffffff;
     border: none;
     border-radius: 20px;
-    box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background-color: var(--light-bg);
+}
+
+html.dark .card {
+    background-color: #2a2a2a;
+    color: var(--dark-text);
 }
 
 .card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.02);
 }
 
-.card-title, .card-text {
-    color: #4e4e4e;
+.card-header {
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-radius: 20px 20px 0 0;
+    text-align: center;
+    padding: 12px;
 }
 
-.highlight {
-    color: #000;
-    font-weight: bold;
+.card-body {
+    padding: 15px;
 }
 
-.container {
-    max-width: 1200px;
+.details-section h5 {
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 8px 0;
 }
 
-input[type="submit"] {
-    background: #2e7d32;
-    color: #fff;
+.details-section .highlight {
+    font-weight: 500;
+    color: #333;
+}
+
+html.dark .details-section .highlight {
+    color: var(--dark-text);
+}
+
+.details-section .total-price .highlight {
+    font-weight: 600;
+    color: var(--orange);
+}
+
+.icon {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+/* Button */
+button, input[type="submit"] {
+    background-color: var(--orange);
     border: none;
+    border-radius: 20px;
     padding: 10px 20px;
-    border-radius: 30px;
-    font-weight: bold;
-    margin-top: 10px;
+    color: white;
+    font-weight: 500;
+    transition: background-color 0.3s;
     cursor: pointer;
-    transition: background 0.3s ease;
 }
 
 input[type="submit"]:hover {
-    background: #1b5e20;
+    background-color: #e55a00;
 }
 
-.row {
-    margin-bottom: 20px;
-}
+/* Footer */
 footer {
-    background-color: #000;
-    color: #fff;
     text-align: center;
-    padding: 12px 0;
-    font-size: 0.9rem;
-  
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #d1dfed;
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
 
+html.dark footer {
+    background-color: #242424;
+    color: var(--dark-text);
+}
+
+footer .row {
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .card {
+        margin: 10px;
+    }
+
+    .card-header {
+        font-size: 1rem;
+    }
+
+    input[type="submit"] {
+        padding: 8px 16px;
+        font-size: 0.9rem;
+    }
+
+    h1.text-center {
+        font-size: 1.5rem;
+    }
 }

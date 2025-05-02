@@ -1,7 +1,7 @@
 body {
     margin: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, hsla(26, 8%, 83%, 0.854) 0%, #a38686 100%);
+    background-color: #d1dfed;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -17,67 +17,83 @@ body {
     color: #f8f9fa;
 }
 
-.btn-warning {
+button {
     background-color: #ef5807;
     border: none;
 }
 
-.btn-warning a {
+button a {
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
 
-.btn-warning a:hover {
-    color: #ffd6c0;
-}
-
 h1 {
     text-align: center;
-    font-family: 'Pacifico', cursive;
     font-size: 3rem;
-    color: #f8f9fa;
     margin: 2rem 0 1rem 0;
     text-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
 }
 
+.product-row {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.product-row .col-md-4 {
+    flex: 0 0 25%;
+    max-width: 25%;
+}
+
 .card {
-    background-color: rgba(255, 255, 255, 0.15);
-    border: none;
-    border-radius: 20px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
-    overflow: hidden;
-    backdrop-filter: blur(12px);
-    transition: 0.3s ease;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
 }
-
 .card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    transform: scale(1.02); 
 }
-
-.card-img-top,
-.card img {
-    height: 180px;
-    object-fit: cover;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
-    width: 100%;
+.card-img-top {
+    height: 150px;
+    object-fit: cover; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
-
 .card-body {
-    padding: 1.2rem;
-    text-align: center;
+    padding: 0.75rem;
 }
-
 .card-title {
-    color: #e85d04;
-    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+.card-text {
+    font-size: 0.85rem;
+    margin-bottom: 0.25rem;
+}
+.badge {
+    font-size: 0.75rem;
+    padding: 0.3rem 0.6rem;
+}
+/* Responsive adjustments */
+@media (max-width: 767px) {
+    .product-row .col-md-4 {
+        flex: 0 0 40%;
+        max-width: 40%;
+    }
+    .card-img-top {
+        height: 120px;
+    }
+}
+@media (max-width: 575px) {
+    .product-row .col-md-4 {
+        flex: 0 0 80%; /* on very small screens */
+        max-width: 80%;
+    }
+    .card-img-top {
+        height: 140px;
+    }
 }
 
-.card-text {
-    color: #f8f9fa;
-}
 
 .badge {
     padding: 0.5em 1em;

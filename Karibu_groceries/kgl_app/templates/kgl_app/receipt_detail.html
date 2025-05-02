@@ -1,32 +1,23 @@
+{% extends 'kgl_app/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="{% static 'css/receiptdetails.css' %}">
-    <title>Receipt Details</title>
-</head>
-
-<body>
-    {% block content %}
+{% block content %}
+<link rel="stylesheet" href="{% static '/css/receiptdetails.css/' %}">
+<title>Receipt Details - Karibu Groceries</title>
+<div class="container py-4 fade-in">
     <div class="receipt-card">
         <div class="receipt-header">
-            <h2>Karibu Grocery Ltd.</h2>
-            <p>Branch: {{ receipt.branch_name }}</p>
-            <p>Tel:+256 78654398</p>
+            <h2><i class="fas fa-shopping-basket me-2"></i> Karibu Groceries Ltd.</h2>
+            <p><i class="fas fa-store me-2"></i> Branch: <span>{{ receipt.branch_name }}</span></p>
+            <p><i class="fas fa-phone me-2"></i> Tel: +256 78654398</p>
         </div>
         <hr>
         <div class="receipt-details">
-            <p>Issued to: {{ receipt.customer_name }}</p>
-            <p>Date: {{ receipt.date }}</p>
-            <p>Time: {{ receipt.time }}</p>
+            <p><i class="fas fa-user me-2"></i> Issued to: <span>{{ receipt.customer_name }}</span></p>
+            <p><i class="fas fa-calendar-alt me-2"></i> Date: <span>{{ receipt.date }}</span></p>
+            <p><i class="fas fa-clock me-2"></i> Time: <span>{{ receipt.time }}</span></p>
         </div>
         <hr>
-        <table>
+        <table class="receipt-table">
             <thead>
                 <tr>
                     <th>Item Name</th>
@@ -45,25 +36,17 @@
             </tbody>
         </table>
         <div class="total-section">
-            Total Amount Paid: UGX {{ receipt.amount_received }}
+            Total Amount Paid: <span>UGX {{ receipt.amount_received }}</span>
         </div>
         <hr>
         <div class="thank-you">
-            THANK YOU
+            <i class="fas fa-heart me-2"></i> THANK YOU
         </div>
     </div>
-    {% endblock %}
-    <div>
-        <button>
-            <a href="/receipt/">Back</a>
-        </button>
+    <div class="text-center">
+        <a href="{% url 'receipt' %}" class="btn-back">
+            <i class="fas fa-arrow-left"></i> Back to Receipts
+        </a>
     </div>
-    <footer>
-        &copy; 2025 Karibu Groceries Ltd Lillian Nakato
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
-        crossorigin="anonymous"></script>
-</body>
-
-</html>
+</div>
+{% endblock %}
