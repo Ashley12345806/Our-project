@@ -48,6 +48,18 @@
                     <div class="col-md-6 mb-3">
                         {{ form.gender|as_crispy_field }}
                     </div>
+                    <div>
+                        <label for="id_is_salesagent">Sales Agent</label>
+                        <input type="checkbox" name="is_salesagent" id="id_is_salesagent">
+                    </div>
+                    <div>
+                        <label for="id_is_manager">Manager</label>
+                        <input type="checkbox" name="is_manager" id="id_is_manager">
+                    </div>
+                    <div>
+                        <label for="id_is_owner">Owner</label>
+                        <input type="checkbox" name="is_owner" id="id_is_owner">
+                    </div>
                 </div>
                 <div class="d-grid mt-4">
                     <input type="submit" value="Sign Up" class="btn btn-primary btn-block">

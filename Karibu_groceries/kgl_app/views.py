@@ -143,25 +143,25 @@ def addproduct(request, pk):
     return render(request, "kgl_app/addproduct.html", {'form': form, 'issued_product': issued_product})
 
 @login_required
-def deferredpayment(request):
+def creditsales(request):
   if request.method == 'POST':
-       form = DefferedPaymentForm(request.POST)
+       form = CreditSaleForm(request.POST)
        if form.is_valid():
            form.save()
            # Redirect on successful form submission
            return redirect('home')
        else:
          # If the form is not valid, return the form with errors
-           return render(request, 'kgl_app/deferredpayment.html', {'form': form})
+           return render(request, 'kgl_app/creditsales.html', {'form': form})
   else:
-         form = DefferedPaymentForm()
+         form = CreditSaleForm()
 # Always return a response in case of GET request or invalid form
-  return render(request, "kgl_app/deferredpayment.html" , {'form': form})
+  return render(request, "kgl_app/creditsales.html" , {'form': form})
 
 @login_required
-def deferredpaymentlist(request):
-    payment = Deffered_payment.objects.all().order_by('id')
-    return render(request, 'kgl_app/deferredpaymentlist.html', {'payments': payment})
+def creditsaleslist(request):
+    payment = CreditSale.objects.all().order_by('id')
+    return render(request, 'kgl_app/creditsaleslist.html', {'payments': payment})
 
 
 def addsale(request):
@@ -228,4 +228,16 @@ def signup(request):
     else:
         form = UserCreation()
     return render(request, 'kgl_app/signup.html', {'form': form, 'title': 'Sign Up'})
+
+def save(self, commit=True):
+    user = super(UserCreation, self).save(commit=False)
+    user.is_salesagent = self.cleaned_data.get('is_salesagent', False)
+    user.is_manager = self.cleaned_data.get('is_manager', False)
+    user.is_owner = self.cleaned_data.get('is_owner', False)
+    
+    if commit:
+        user.is_active = True
+        user.is_staff = True
+        user.save()
+    return user
 

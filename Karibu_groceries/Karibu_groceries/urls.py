@@ -40,8 +40,8 @@ urlpatterns = [
     path('receipt/<int:receipt_id>/', views.receipt_detail, name='receipt_detail'),
     path('add_to_stock/<str:pk>/', views.add_to_stock, name='add_to_stock'),
     path('addproduct/', views.addproduct, name='addproduct'), 
-    path('deferredpaymentlist/',views.deferredpaymentlist, name ='deferredpaymentlist'),
-    path('deferredpayment/', views.deferredpayment, name='deferredpayment'),
+    path('creditsaleslist/',views.creditsaleslist, name ='creditsaleslist'),
+    path('creditsales/', views.creditsales, name='creditsales'),
     path('signup/', views.signup, name='signup'),
     
   

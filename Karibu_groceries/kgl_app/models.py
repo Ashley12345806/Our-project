@@ -71,7 +71,7 @@ class Sale(models.Model):
         return self.product
     
 
-class Deffered_payment(models.Model):
+class CreditSale(models.Model):
     customer_name = models.CharField(max_length=25, null=True, blank=True)
     contact = models.CharField( max_length=50,null=True, blank=True)
     address = models.CharField(max_length=20, null=True, blank=True)

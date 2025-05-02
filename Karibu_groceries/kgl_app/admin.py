@@ -6,4 +6,4 @@ from .models import *
 admin.site.register(UserProfile)
 admin.site.register(Product)
 admin.site.register(Sale)
-admin.site.register(Deffered_payment)
+admin.site.register(CreditSale)

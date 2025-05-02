@@ -1,13 +1,12 @@
 {% extends 'kgl_app/base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/deferredpaymentlist.css' %}">
-<title>Deferred Payments</title>
+<link rel="stylesheet" href="{% static 'css/creditsaleslist.css' %}">
+<title>Credit Sales List</title>
 <div class="container">
   <h2 class="text-center my-4"><i class="fas fa-receipt"></i> Deferred Payments</h2>
   <div class="text-center mb-3">
-    <a href="{% url 'deferredpayment' %}" class="btn btn-add"><i class="fas fa-plus-circle"></i> Add New Deferred
-      Payment</a>
+    <a href="{% url 'creditsales' %}" class="btn btn-add"><i class="fas fa-plus-circle"></i> Add Credit Sales</a>
   </div>
   <table class="table table-striped table-hover">
     <thead>
@@ -45,8 +44,7 @@
             <i class="fas fa-box-open" style="font-size: 60px; color: #ccc;"></i>
             <h3>No Deferred Payments Found</h3>
             <p>Your payment records are empty. Add your first payment to get started!</p>
-            <a href="{% url 'deferredpayment' %}" class="btn btn-add"><i class="fas fa-plus-circle"></i> Add New
-              Deferred Payment</a>
+            <a href="{% url 'creditsales' %}" class="btn btn-add"><i class="fas fa-plus-circle"></i> Add Credit Sales Payment</a>
           </div>
         </td>
       </tr>

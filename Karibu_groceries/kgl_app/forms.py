@@ -2,7 +2,7 @@
 from django.forms import ModelForm
 #accsessing our models to create corresponding forms
 from .models import *
-from .models import Deffered_payment
+from .models import CreditSale
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -26,9 +26,9 @@ class SaleForm(ModelForm):
         #fields = '__all__'       
 
 
-class DefferedPaymentForm(ModelForm):
+class CreditSaleForm(ModelForm):
     class Meta:
-        model = Deffered_payment
+        model = CreditSale
         fields = ['customer_name', 'contact', 'address', 'nin', 'product_name', 'quantity', 'amount_due', 'balance', 'duedate', 'date_of_payment', 'branch_name', 'salesagent']
         #fields = '__all__' 
 
