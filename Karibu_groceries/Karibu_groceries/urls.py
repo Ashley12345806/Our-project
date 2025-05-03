@@ -16,33 +16,29 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-#accessing our views from  kgl_app
 from kgl_app import views
 from django.contrib.auth import views as auth_views
-
-
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='index'),
     path('home/', views.index, name='home'),
     path('sales/', views.sales, name='sales'),
-    path('', auth_views.LoginView.as_view(template_name='kgl_app/login.html'), name='login'),
-    path('login/',views.Login,name='login'),
+    path('login/', views.Login, name='login'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('managerdashboard/', views.managerdashboard, name='managerdashboard'),
     path('logout/', views.logout, name='logout'),
     path('products/', views.products, name='products'),
     path('productdetail/<int:product_id>/', views.product_detail, name='productdetail'),
     path('delete/<int:product_id>/', views.delete_product, name='delete_product'),
-    path('issue_item/<str:pk>/', views.issue_item, name='issue_item'),
+    path('edit/<int:product_id>/', views.edit_product, name='edit_product'),
+    path('issue_item/<int:pk>/', views.issue_item, name='issue_item'),
     path('receipt/', views.receipt, name='receipt'),
     path('receipt/<int:receipt_id>/', views.receipt_detail, name='receipt_detail'),
-    path('add_to_stock/<str:pk>/', views.add_to_stock, name='add_to_stock'),
-    path('addproduct/', views.addproduct, name='addproduct'), 
-    path('creditsaleslist/',views.creditsaleslist, name ='creditsaleslist'),
+    path('add_to_stock/<int:pk>/', views.add_to_stock, name='add_to_stock'),
+    path('addproduct/', views.addproduct, name='addproduct'),
+    path('addproduct/<int:pk>/', views.addproduct, name='addproduct_with_pk'),
+    path('creditsaleslist/', views.creditsaleslist, name='creditsaleslist'),
     path('creditsales/', views.creditsales, name='creditsales'),
     path('signup/', views.signup, name='signup'),
-    
-  
 ]
