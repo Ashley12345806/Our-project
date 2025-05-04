@@ -6,7 +6,6 @@
   --dark-text: #F5F5F5;
   --border-radius: 8px;
   --black: #000000;
-  --orange: #FF6200;
 }
 
 body {
@@ -93,7 +92,7 @@ html.dark .form-card {
 }
 
 .btn-submit.cancel:hover {
-  background-color: #e55a00;
+  background-color: #FF9F67;
 }
 
 /* Back Button */
@@ -112,7 +111,7 @@ html.dark .form-card {
 }
 
 .btn-back:hover {
-  background-color: #e55a00;
+  background-color: #FF9F67;
   color: white;
 }
 

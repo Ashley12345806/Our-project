@@ -37,7 +37,6 @@ footer {
     border-radius: var(--border-radius);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     padding: 20px;
-    margin-bottom: 20px;
 }
 
 /* Table header styling */
@@ -92,18 +91,11 @@ footer {
     border-color: var(--primary-color);
 }
 
-.btn-primary:hover {
-    background-color: #4a49b8;
-}
 
 .btn-danger {
-    background-color: #ff5a5a;
     border-color: #ff5a5a;
 }
 
-.btn-danger:hover {
-    background-color: #e04545;
-}
 
 .add-product-btn {
     background-color: var(--secondary-color);
@@ -114,9 +106,6 @@ footer {
     font-weight: 600;
 }
 
-.add-product-btn:hover {
-    background-color: #ff8c4d;
-}
 
 .add-product-btn i {
     margin-right: 8px;
@@ -125,7 +114,6 @@ footer {
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 30px;
     border-radius: var(--border-radius) var(--border-radius) 0 0;
     color: black;
 }

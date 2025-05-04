@@ -40,5 +40,10 @@ urlpatterns = [
     path('addproduct/<int:pk>/', views.addproduct, name='addproduct_with_pk'),
     path('creditsaleslist/', views.creditsaleslist, name='creditsaleslist'),
     path('creditsales/', views.creditsales, name='creditsales'),
+    path('supplier/', views.supplier_list, name='supplier'),
+    path('supplier/<int:supplier_id>/', views.supplier_detail, name='supplier_detail'),
+    path('supplier/add/', views.add_supplier, name='add_supplier'),
+    path('supplier/<int:supplier_id>/edit/', views.edit_supplier, name='edit_supplier'),
+    path('supplier/<int:supplier_id>/delete/', views.delete_supplier, name='delete_supplier'),
     path('signup/', views.signup, name='signup'),
 ]

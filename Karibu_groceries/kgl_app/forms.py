@@ -2,7 +2,7 @@
 from django.forms import ModelForm
 #accsessing our models to create corresponding forms
 from .models import *
-from .models import CreditSale
+from .models import CreditSale,Supplier
 from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
@@ -68,3 +68,8 @@ class UserCreation(UserCreationForm):
             user.save()
         return user
 
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ['supplier_name', 'contact_number', 'email', 'address', 'branch_name']

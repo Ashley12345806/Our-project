@@ -5,6 +5,7 @@ from .filters import ProductFilter
 from kgl_app.models import *
 from kgl_app.forms import *
 from django.db.models import Sum
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -121,10 +122,14 @@ def managerdashboard(request):
     total_sales = Sale.objects.aggregate(total=Sum('amount_received'))['total'] or 0
     total_receipts = Sale.objects.count()
     total_products = Product.objects.count()
+    total_suppliers = Supplier.objects.count()
+    pending_credits = CreditSale.objects.count()
     context = {
         'total_sales': total_sales,
         'total_receipts': total_receipts,
         'total_products': total_products,
+        'total_suppliers': total_suppliers,
+        'pending_credits': pending_credits,
     }
     return render(request, "kgl_app/managerdashboard.html", context)
 
@@ -240,3 +245,62 @@ def save(self, commit=True):
         user.save()
     return user
 
+
+@login_required
+def supplier_list(request):
+    if not request.user.is_manager:
+        messages.error(request, "You do not have permission to view this page.")
+        return redirect('home')  # Adjust 'home' to your home URL name
+    suppliers = Supplier.objects.all()
+    return render(request, 'kgl_app/supplier.html', {'suppliers': suppliers})
+
+@login_required
+def supplier_detail(request, supplier_id):
+    if not request.user.is_manager:
+        messages.error(request, "You do not have permission to view this page.")
+        return redirect('home')
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    return render(request, 'kgl_app/supplier_detail.html', {'supplier': supplier})
+
+@login_required
+def add_supplier(request):
+    if not request.user.is_manager:
+        messages.error(request, "You do not have permission to access this page.")
+        return redirect('home')
+    if request.method == 'POST':
+        form = SupplierForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Supplier added successfully!")
+            return redirect('supplier')
+    else:
+        form = SupplierForm()
+    return render(request, 'kgl_app/add_supplier.html', {'form': form})
+
+@login_required
+def edit_supplier(request, supplier_id):
+    if not request.user.is_manager:
+        messages.error(request, "You do not have permission to access this page.")
+        return redirect('home')
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    if request.method == 'POST':
+        form = SupplierForm(request.POST, instance=supplier)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Supplier updated successfully!")
+            return redirect('supplier')
+    else:
+        form = SupplierForm(instance=supplier)
+    return render(request, 'kgl_app/edit_supplier.html', {'form': form, 'supplier': supplier})
+
+@login_required
+def delete_supplier(request, supplier_id):
+    if not request.user.is_manager:
+        messages.error(request, "You do not have permission to access this page.")
+        return redirect('home')
+    supplier = get_object_or_404(Supplier, id=supplier_id)
+    if request.method == 'POST':
+        supplier.delete()
+        messages.success(request, "Supplier deleted successfully!")
+        return redirect('supplier')
+    return render(request, 'kgl_app/delete_supplier.html', {'supplier': supplier})

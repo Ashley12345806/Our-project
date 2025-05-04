@@ -18,10 +18,10 @@
         <div>
             <h3><i class="fas fa-tachometer-alt"></i> Manager Dashboard</h3>
             <a href="/home/"><i class="fas fa-home"></i> HOME</a>
+            <a href="/supplier/"><i class="fas fa-truck"></i> SUPPLIERS</a>
             <a href="/sales/"><i class="fas fa-dollar-sign"></i> SALES</a>
             <a href="/receipt/"><i class="fas fa-receipt"></i> RECEIPTS</a>
             <a href="/products/"><i class="fas fa-box"></i> PRODUCTS</a>
-            <a href="/addproduct/"><i class="fas fa-plus"></i> ADD PRODUCT</a>
             <a href="/logout/" style="color: #ffdddd;"><i class="fas fa-sign-out-alt"></i> LOG OUT</a>
         </div>
     </div>
@@ -35,6 +35,14 @@
             <div class="card">
                 <h5>Products</h5>
                 <h3>{{ total_products }}</h3>
+            </div>
+            <div class="card col-md-3">
+                <h5>Suppliers</h5>
+                <h3>{{ total_suppliers }}</h3>
+            </div>
+            <div class="card col-md-3">
+                <h5>Pending Credits</h5>
+                <h3>{{ pending_credits }}</h3>
             </div>
         </div>
     </div>

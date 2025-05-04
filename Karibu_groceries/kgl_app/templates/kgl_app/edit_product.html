@@ -2,13 +2,34 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="container mt-5">
-    <h2>Edit Product: {{ product.product_name }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <button type="submit" class="btn btn-primary">Save Changes</button>
-        <a href="{% url 'products' %}" class="btn btn-secondary">Cancel</a>
-    </form>
+<link rel="stylesheet" href="{% static '/css/issue_item.css' %}">
+<title>Edit Product – Karibu Groceries</title>
+
+<div class="form-container">
+  <form method="POST" class="form-card">
+    <h2><i class="fas fa-edit icon"></i>Edit Product: {{ product.product_name }}</h2>
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">{{ form.product_name|as_crispy_field }}</div>
+      <div class="col-md-6">{{ form.branch_name|as_crispy_field }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">{{ form.unit_cost|as_crispy_field }}</div>
+      <div class="col-md-6">{{ form.unit_price|as_crispy_field }}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-6">{{ form.total_quantity|as_crispy_field }}</div>
+    </div>
+
+    <div class="btn-container">
+      <button type="submit" class="btn btn-submit submit">Save Changes</button>
+      <button type="reset" class="btn btn-submit cancel">Cancel</button>
+    </div>
+    <div class="text-center">
+      <a href="{% url 'products' %}" class="btn-back">
+        <i class="fas fa-arrow-left"></i> Back to Products
+      </a>
+    </div>
+  </form>
 </div>
 {% endblock %}

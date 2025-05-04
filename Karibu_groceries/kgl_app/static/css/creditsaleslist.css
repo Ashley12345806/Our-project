@@ -31,7 +31,7 @@ body {
 
   .table thead {
     background-color: #343a40;
-    color: #ffc107;
+    color: #FF9F67;
   }
 
   .table tbody tr:hover {
@@ -44,14 +44,14 @@ body {
     font-size: 1.2rem;
     border-radius: 20px;
     padding: 12px 25px;
-    background-color: #e55a00;
+    background-color: #FF9F67;
     color: white;
     transition: background-color 0.3s ease, transform 0.3s ease;
     margin-top: 20px;
   }
 
   .btn-add:hover {
-    background-color: #e55a00;
+    background-color:#FF9F67;
     transform: scale(1.05);
   }
 
