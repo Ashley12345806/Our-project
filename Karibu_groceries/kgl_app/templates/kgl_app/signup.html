@@ -27,7 +27,7 @@
     <div class="container d-flex justify-content-center align-items-center min-vh-100">
         <div class="card shadow-lg p-4" style="width: 100%; max-width: 600px;">
             <h2 class="text-center mb-4">Create an Account</h2>
-            <form action=""  method="POST" id="signup-form">
+            <form action="" method="POST" id="signup-form">
                 {% csrf_token %}
                 <div class="row">
                     <div class="col-md-6 mb-3">
@@ -48,17 +48,20 @@
                     <div class="col-md-6 mb-3">
                         {{ form.gender|as_crispy_field }}
                     </div>
-                    <div>
-                        <label for="id_is_salesagent">Sales Agent</label>
-                        <input type="checkbox" name="is_salesagent" id="id_is_salesagent">
+                    <div class="col-md-6 mb-3">
+                        {{ form.branch|as_crispy_field }}
                     </div>
-                    <div>
-                        <label for="id_is_manager">Manager</label>
-                        <input type="checkbox" name="is_manager" id="id_is_manager">
+                    <div class="mb-3">
+                        <label for="id_is_salesagent" class="form-label">Sales Agent</label>
+                        <input type="checkbox" name="is_salesagent" id="id_is_salesagent" class="form-check-input">
                     </div>
-                    <div>
-                        <label for="id_is_owner">Owner</label>
-                        <input type="checkbox" name="is_owner" id="id_is_owner">
+                    <div class="mb-3">
+                        <label for="id_is_manager" class="form-label">Manager</label>
+                        <input type="checkbox" name="is_manager" id="id_is_manager" class="form-check-input">
+                    </div>
+                    <div class="mb-3">
+                        <label for="id_is_owner" class="form-label">Owner</label>
+                        <input type="checkbox" name="is_owner" id="id_is_owner" class="form-check-input">
                     </div>
                 </div>
                 <div class="d-grid mt-4">
@@ -68,8 +71,8 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 </body>
 </html>

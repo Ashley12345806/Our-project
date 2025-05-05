@@ -7,6 +7,13 @@ from django.core.exceptions import ValidationError
 from datetime import datetime
 
 
+class Branch(models.Model):
+    name = models.CharField(max_length=50, unique=True, blank=False, null=False,default='')
+
+    def __str__(self):
+        return self.name
+
+
 class UserProfile(AbstractUser):
     is_salesagent = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
@@ -18,14 +25,19 @@ class UserProfile(AbstractUser):
         choices=[('Female', 'Female'), ('Male', 'Male')],
         blank=True
     )
+    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.username
 
+    def clean(self):
+        if (self.is_manager or self.is_salesagent) and not self.branch:
+            raise ValidationError("Managers and sales agents must be assigned to a branch.")
+
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=50,blank=False,null=False)
-    branch_name = models.CharField(max_length=50, blank=False)
+    product_name = models.CharField(max_length=50, blank=False, null=False)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
     product_type = models.CharField(max_length=50, blank=True)
     time_of_produce = models.CharField(max_length=50, blank=True)
     stock_contact = models.CharField(max_length=50, blank=True)
@@ -43,8 +55,8 @@ class Product(models.Model):
 
 
 class Sale(models.Model):
-    product = models.CharField(max_length=50,blank=False,null=False)
-    branch_name = models.CharField(max_length=100)
+    product = models.CharField(max_length=50, blank=False, null=False)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
     quantity = models.FloatField(default=0)
     amount_received = models.IntegerField(default=0)
     customer_name = models.CharField(max_length=50)
@@ -66,18 +78,18 @@ class Sale(models.Model):
 
 
 class CreditSale(models.Model):
-    customer_name = models.CharField(max_length=25, blank=False,null=False)
-    contact = models.CharField(max_length=50, blank=False,null=False)
-    address = models.CharField(max_length=20, blank=False,null=False)
-    nin = models.CharField(max_length=50, blank=False,null=False, unique=True)
-    product_name = models.CharField(max_length=50, blank=False,null=False)
-    quantity = models.FloatField(default=2, blank=False,null=False)
-    amount_due = models.FloatField(default=2, blank=False,null=False)
-    balance = models.FloatField(default=2, blank=False,null=False)
+    customer_name = models.CharField(max_length=25, blank=False, null=False)
+    contact = models.CharField(max_length=50, blank=False, null=False)
+    address = models.CharField(max_length=20, blank=False, null=False)
+    nin = models.CharField(max_length=50, blank=False, null=False, unique=True)
+    product_name = models.CharField(max_length=50, blank=False, null=False)
+    quantity = models.FloatField(default=2, blank=False, null=False)
+    amount_due = models.FloatField(default=2, blank=False, null=False)
+    balance = models.FloatField(default=2, blank=False, null=False)
     duedate = models.DateField(default=timezone.now)
     date_of_payment = models.DateField(default=timezone.now)
-    branch_name = models.CharField(max_length=50, blank=False,null=False)
-    salesagent = models.CharField(max_length=50, blank=False,null=False)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
+    salesagent = models.CharField(max_length=50, blank=False, null=False)
     date_of_dispatch = models.DateField(default=timezone.now)
 
     def __str__(self):
@@ -89,11 +101,11 @@ class CreditSale(models.Model):
 
 
 class Supplier(models.Model):
-    supplier_name = models.CharField(max_length=100,blank=False,null=False)
-    contact_number = models.CharField(max_length=20,blank=False,null=False)
-    email = models.CharField(max_length=100, blank=False,null=False)
-    address = models.CharField(max_length=200, blank=False,null=False)
-    branch_name = models.CharField(max_length=50, blank=False,null=False)
+    supplier_name = models.CharField(max_length=100, blank=False, null=False)
+    contact_number = models.CharField(max_length=20, blank=False, null=False)
+    email = models.CharField(max_length=100, blank=False, null=False)
+    address = models.CharField(max_length=200, blank=False, null=False)
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

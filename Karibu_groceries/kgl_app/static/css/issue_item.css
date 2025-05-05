@@ -78,12 +78,9 @@ html.dark .form-card {
   transition: background-color 0.2s;
 }
 
-.btn-submit.submit:hover {
-  background-color: #333333;
-}
 
 .btn-submit.cancel {
-  background-color: var(--orange);
+  background-color: #000000;
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
@@ -91,15 +88,12 @@ html.dark .form-card {
   transition: background-color 0.2s;
 }
 
-.btn-submit.cancel:hover {
-  background-color: #FF9F67;
-}
 
 /* Back Button */
 .btn-back {
   display: inline-flex;
   align-items: center;
-  background-color: var(--orange);
+  background-color:#5D5CDE;
   color: white;
   border: none;
   border-radius: 20px;
@@ -110,10 +104,6 @@ html.dark .form-card {
   transition: background-color 0.2s;
 }
 
-.btn-back:hover {
-  background-color: #FF9F67;
-  color: white;
-}
 
 .btn-back i {
   margin-right: 8px;
