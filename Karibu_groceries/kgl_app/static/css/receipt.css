@@ -141,7 +141,6 @@ input[type="submit"]:hover {
 /* Footer */
 footer {
     text-align: center;
-    margin-top: 30px;
     padding: 20px;
     background-color: #d1dfed;
     border-radius: var(--border-radius) var(--border-radius) 0 0;

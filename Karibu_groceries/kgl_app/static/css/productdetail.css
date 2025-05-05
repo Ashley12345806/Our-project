@@ -90,12 +90,12 @@ html.dark .card {
   padding: 10px 20px;
   color: rgb(40, 39, 39);
   transition: background-color 0.3s;
+  size: 10px;
 }
 
 
 .footer {
   text-align: center;
-  padding: 20px;
   background-color: #d1dfed;
   border-radius: var(--border-radius) var(--border-radius) 0 0;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);

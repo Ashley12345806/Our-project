@@ -108,6 +108,7 @@ def dashboard(request):
     total_products = Product.objects.count()
     total_branches = Product.objects.values('branch_name').distinct().count()
     context = {
+        'user': request.user,
         'total_sales': total_sales,
         'total_receipts': total_receipts,
         'total_products': total_products,
@@ -125,6 +126,7 @@ def managerdashboard(request):
     total_suppliers = Supplier.objects.count()
     pending_credits = CreditSale.objects.count()
     context = {
+        'user': request.user,
         'total_sales': total_sales,
         'total_receipts': total_receipts,
         'total_products': total_products,

@@ -5,7 +5,7 @@ body {
 }
 
 .navbar {
-    background-color: #c7e3e8;
+    background-color: #5D5CDE;
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.5);
 }
 
@@ -30,12 +30,12 @@ h2 {
 
 #signup-form .form-label {
     font-size: 0.8rem; /* Further reduced label size */
-    color: #333;
+    color: #000;
     margin-bottom: 0.2rem; /* Reduced label spacing */
 }
 
 #signup-form input[type="submit"] {
-    background-color: #2575fc;
+    background-color: #5D5CDE;
     border: none;
     border-radius: 6px;
     font-size: 0.85rem; /* Smaller button text */
@@ -44,7 +44,7 @@ h2 {
 }
 
 #signup-form input[type="submit"]:hover {
-    background-color: #1a5ed8;
+    background-color: #5D5CDE;
 }
 
 .btn-outline-primary, .btn-outline-danger {
@@ -60,7 +60,7 @@ h2 {
 /* Adjust crispy forms helper text */
 #signup-form .helptext {
     font-size: 0.7rem; /* Smaller helper text */
-    color: #6c757d;
+    color: #000;
     margin-top: 0.1rem; /* Reduced helper text spacing */
 }
 
@@ -75,4 +75,8 @@ h2 {
         width: 90%;
         max-width: 350px; /* Smaller on mobile */
     }
+}
+
+.ms-2{
+    color: #000;
 }

@@ -24,8 +24,8 @@ class UserProfile(AbstractUser):
 
 
 class Product(models.Model):
-    product_name = models.CharField(max_length=50)
-    branch_name = models.CharField(max_length=50, blank=True)
+    product_name = models.CharField(max_length=50,blank=False,null=False)
+    branch_name = models.CharField(max_length=50, blank=False)
     product_type = models.CharField(max_length=50, blank=True)
     time_of_produce = models.CharField(max_length=50, blank=True)
     stock_contact = models.CharField(max_length=50, blank=True)
@@ -43,7 +43,7 @@ class Product(models.Model):
 
 
 class Sale(models.Model):
-    product = models.CharField(max_length=50)
+    product = models.CharField(max_length=50,blank=False,null=False)
     branch_name = models.CharField(max_length=100)
     quantity = models.FloatField(default=0)
     amount_received = models.IntegerField(default=0)
@@ -66,18 +66,18 @@ class Sale(models.Model):
 
 
 class CreditSale(models.Model):
-    customer_name = models.CharField(max_length=25, blank=True)
-    contact = models.CharField(max_length=50, blank=True)
-    address = models.CharField(max_length=20, blank=True)
-    nin = models.CharField(max_length=50, blank=True, unique=True)
-    product_name = models.CharField(max_length=50, blank=True)
-    quantity = models.FloatField(default=2, blank=True)
-    amount_due = models.FloatField(default=2, blank=True)
-    balance = models.FloatField(default=2, blank=True)
+    customer_name = models.CharField(max_length=25, blank=False,null=False)
+    contact = models.CharField(max_length=50, blank=False,null=False)
+    address = models.CharField(max_length=20, blank=False,null=False)
+    nin = models.CharField(max_length=50, blank=False,null=False, unique=True)
+    product_name = models.CharField(max_length=50, blank=False,null=False)
+    quantity = models.FloatField(default=2, blank=False,null=False)
+    amount_due = models.FloatField(default=2, blank=False,null=False)
+    balance = models.FloatField(default=2, blank=False,null=False)
     duedate = models.DateField(default=timezone.now)
     date_of_payment = models.DateField(default=timezone.now)
-    branch_name = models.CharField(max_length=50, blank=True)
-    salesagent = models.CharField(max_length=50, blank=True)
+    branch_name = models.CharField(max_length=50, blank=False,null=False)
+    salesagent = models.CharField(max_length=50, blank=False,null=False)
     date_of_dispatch = models.DateField(default=timezone.now)
 
     def __str__(self):
@@ -89,11 +89,11 @@ class CreditSale(models.Model):
 
 
 class Supplier(models.Model):
-    supplier_name = models.CharField(max_length=100)
-    contact_number = models.CharField(max_length=20)
-    email = models.CharField(max_length=100, blank=True)
-    address = models.CharField(max_length=200, blank=True)
-    branch_name = models.CharField(max_length=50, blank=True)
+    supplier_name = models.CharField(max_length=100,blank=False,null=False)
+    contact_number = models.CharField(max_length=20,blank=False,null=False)
+    email = models.CharField(max_length=100, blank=False,null=False)
+    address = models.CharField(max_length=200, blank=False,null=False)
+    branch_name = models.CharField(max_length=50, blank=False,null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
