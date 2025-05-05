@@ -95,7 +95,7 @@ def issue_item(request, pk):
             issued_product.save()
             
             messages.success(request, f"Successfully sold {issued_quantity} units of {issued_product.product_name} for {total_sale_value}.")
-            return redirect('receipt')
+            return redirect('products')  # This ensures redirection to the products page
     return render(request, "kgl_app/issue_item.html", {'sales_form': sales_form, 'issued_product': issued_product})
 
 

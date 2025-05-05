@@ -109,6 +109,20 @@ html.dark .form-card {
   margin-right: 8px;
 }
 
+
+.messages {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.messages .error {
+  color: red;
+}
+
+.messages .success {
+  color: green;
+}
+
 /* Footer */
 footer {
   text-align: center;
