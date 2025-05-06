@@ -62,10 +62,6 @@ html, body {
     font-weight: 500;
   }
 
-  .btn-update:hover {
-    background-color: #218838;
-  }
-
   .footer {
     background-color: #000;
     color: #fff;
