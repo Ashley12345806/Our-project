@@ -18,14 +18,14 @@ class UserProfile(AbstractUser):
     is_salesagent = models.BooleanField(default=False)
     is_manager = models.BooleanField(default=False)
     is_owner = models.BooleanField(default=False)
-    address = models.CharField(max_length=50, blank=True)
-    phonenumber = models.CharField(max_length=20, blank=True)
+    address = models.CharField(max_length=50, blank=False)
+    phonenumber = models.CharField(max_length=20, blank=False)
     gender = models.CharField(
         max_length=20,
         choices=[('Female', 'Female'), ('Male', 'Male')],
         blank=True
     )
-    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL, null=True, blank=True)
+    branch = models.ForeignKey(Branch, on_delete=models.SET_NULL,null=True, blank=False)
 
     def __str__(self):
         return self.username
@@ -37,7 +37,7 @@ class UserProfile(AbstractUser):
 
 class Product(models.Model):
     product_name = models.CharField(max_length=50, blank=False, null=False)
-    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False,default='')
     product_type = models.CharField(max_length=50, blank=True)
     time_of_produce = models.CharField(max_length=50, blank=True)
     stock_contact = models.CharField(max_length=50, blank=True)
@@ -56,7 +56,7 @@ class Product(models.Model):
 
 class Sale(models.Model):
     product = models.CharField(max_length=50, blank=False, null=False)
-    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False,null= True,default='')
     quantity = models.FloatField(default=0)
     amount_received = models.IntegerField(default=0)
     customer_name = models.CharField(max_length=50)
@@ -88,7 +88,7 @@ class CreditSale(models.Model):
     balance = models.FloatField(default=2, blank=False, null=False)
     duedate = models.DateField(default=timezone.now)
     date_of_payment = models.DateField(default=timezone.now)
-    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=False,default='')
+    branch = models.ForeignKey(Branch, on_delete=models.CASCADE, blank=False, null=True,default='')
     salesagent = models.CharField(max_length=50, blank=False, null=False)
     date_of_dispatch = models.DateField(default=timezone.now)
 
