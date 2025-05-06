@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" {% if dark_mode %}class="dark"{% endif %}>
+<html lang="en" {% if dark_mode %}class="dark" {% endif %}>
 
 <head>
     <meta charset="UTF-8">
@@ -210,8 +210,6 @@
         </div>
     </nav>
 
-    <h1>OUR PRODUCTS</h1>
-
     <div class="container py-4">
         <!-- First row: 3 products -->
         <div class="row product-row mb-4">
@@ -219,19 +217,29 @@
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100">
                     <img src="{% if product.product_name == 'Beans' %}{% static 'images/beans.jpg' %}
-                              {% elif product.product_name == 'Groundnuts' %}{% static 'images/gnuts.jpg' %}
-                              {% elif product.product_name == 'Maize' %}{% static 'images/maize.jpg' %}
-                              {% elif product.product_name == 'Cowpeas' %}{% static 'images/cowpeas.jpg' %}
-                              {% elif product.product_name == 'Soy beans' %}{% static 'images/soybeans.jpg' %}
-                              {% else %}{% static 'images/default.jpg' %}{% endif %}" 
-                         class="card-img-top img-fluid" alt="{{ product.product_name }}">
+                  {% elif product.product_name == 'Groundnuts' %}{% static 'images/gnuts.jpg' %}
+                  {% elif product.product_name == 'Maize' %}{% static 'images/maize.jpg' %}
+                  {% elif product.product_name == 'Cowpeas' %}{% static 'images/cowpeas.jpg' %}
+                  {% elif product.product_name == 'Soy beans' %}{% static 'images/soybeans.jpg' %}
+                  {% else %}{% static 'images/default.jpg' %}{% endif %}" class="card-img-top img-fluid"
+                        alt="{{ product.product_name }}">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #000;">{{ product.product_name }}</h5>
                         <p class="card-text" style="color: #000;">{{ product.product_type }}</p>
                         <p class="card-text" style="color: #000;">UGX {{ product.unit_price }}</p>
-                        <span class="badge {% if product.total_quantity > 5000 %} bg-success {% else %} bg-danger {% endif %}">
-                            {% if product.total_quantity > 5000 %} In Stock {% else %} Low Stock {% endif %}
+                        <span
+                            class="badge {% if product.total_quantity == 0 %}bg-secondary{% elif product.total_quantity > 200 %}bg-success{% else %}bg-danger{% endif %}">
+                            {% if product.total_quantity == 0 %}Not in Stock{% elif product.total_quantity > 200 %}In
+                            Stock{% else %}Low Stock{% endif %}
                         </span>
+                        {% if product.total_quantity > 0 %}
+                        <a href="{% url 'issue_item' product.id %}"
+                            class="badge {% if product.total_quantity > 200 %}bg-success{% else %}bg-danger{% endif %} text-white text-decoration-none mt-2"
+                            style="display: inline-block; padding: 0.25em 0.4em;">Sell</a>
+                        {% else %}
+                        <span class="badge bg-secondary text-white mt-2"
+                            style="display: inline-block; padding: 0.25em 0.4em;" disabled>Sell</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
@@ -244,26 +252,35 @@
             <div class="col-md-4 col-sm-6 mb-4">
                 <div class="card h-100">
                     <img src="{% if product.product_name == 'Beans' %}{% static 'images/beans.jpg' %}
-                              {% elif product.product_name == 'Groundnuts' %}{% static 'images/gnuts.jpg' %}
-                              {% elif product.product_name == 'Maize' %}{% static 'images/maize.jpg' %}
-                              {% elif product.product_name == 'Cowpeas' %}{% static 'images/cowpeas.jpg' %}
-                              {% elif product.product_name == 'Soy beans' %}{% static 'images/soybeans.jpg' %}
-                              {% else %}{% static 'images/default.jpg' %}{% endif %}" 
-                         class="card-img-top img-fluid" alt="{{ product.product_name }}">
+                  {% elif product.product_name == 'Groundnuts' %}{% static 'images/gnuts.jpg' %}
+                  {% elif product.product_name == 'Maize' %}{% static 'images/maize.jpg' %}
+                  {% elif product.product_name == 'Cowpeas' %}{% static 'images/cowpeas.jpg' %}
+                  {% elif product.product_name == 'Soy beans' %}{% static 'images/soybeans.jpg' %}
+                  {% else %}{% static 'images/default.jpg' %}{% endif %}" class="card-img-top img-fluid"
+                        alt="{{ product.product_name }}">
                     <div class="card-body">
                         <h5 class="card-title" style="color: #000;">{{ product.product_name }}</h5>
                         <p class="card-text" style="color: #000;">{{ product.product_type }}</p>
                         <p class="card-text" style="color: #000;">UGX {{ product.unit_price }}</p>
-                        <span class="badge {% if product.total_quantity > 5000 %} bg-success {% else %} bg-danger {% endif %}">
-                            {% if product.total_quantity > 5000 %} In Stock {% else %} Low Stock {% endif %}
+                        <span
+                            class="badge {% if product.total_quantity == 0 %}bg-secondary{% elif product.total_quantity > 200 %}bg-success{% else %}bg-danger{% endif %}">
+                            {% if product.total_quantity == 0 %}Not in Stock{% elif product.total_quantity > 200 %}In
+                            Stock{% else %}Low Stock{% endif %}
                         </span>
+                        {% if product.total_quantity > 0 %}
+                        <a href="{% url 'issue_item' product.id %}"
+                            class="badge {% if product.total_quantity > 200 %}bg-success{% else %}bg-danger{% endif %} text-white text-decoration-none mt-2"
+                            style="display: inline-block; padding: 0.25em 0.4em;">Sell</a>
+                        {% else %}
+                        <span class="badge bg-secondary text-white mt-2"
+                            style="display: inline-block; padding: 0.25em 0.4em;" disabled>Sell</span>
+                        {% endif %}
                     </div>
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
-
     <footer>
         <div class="row align-items-center justify-content-center">
             <div class="col-auto">
@@ -277,4 +294,5 @@
         integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

@@ -6,7 +6,7 @@
 <title>Sales Input – Karibu Groceries</title>
 
 <div class="form-container">
-  <form method="POST" class="form-card">
+  <form method="POST" class="form-card" {% if is_out_of_stock %}onsubmit="return false;" {% endif %}>
     <h2><i class="fas fa-shopping-cart icon"></i>Sales Input Form</h2>
     {% csrf_token %}
     <div class="row">
@@ -26,7 +26,7 @@
     </div>
 
     <div class="btn-container">
-      <button type="submit" class="btn btn-submit submit">Sell Item</button>
+      <button type="submit" class="btn btn-submit submit" {% if is_out_of_stock %}disabled{% endif %}>Sell Item</button>
       <button type="reset" class="btn btn-submit cancel">Cancel</button>
     </div>
     {% if messages %}

@@ -55,7 +55,6 @@ def edit_product(request, product_id):
         form = ProductForm(instance=product)
     return render(request, 'kgl_app/edit_product.html', {'form': form, 'product': product})
 
-
 @login_required
 def issue_item(request, pk):
     if not request.user.is_salesagent:
@@ -63,6 +62,15 @@ def issue_item(request, pk):
     issued_product = get_object_or_404(Product, id=pk)
     if issued_product.branch != request.user.branch:
         return HttpResponseForbidden("You are not authorized to issue this product.")
+    
+    # Check if product is out of stock
+    if issued_product.total_quantity == 0:
+        messages.error(request, f"{issued_product.product_name} is not in stock and cannot be sold.")
+        return render(request, "kgl_app/issue_item.html", {
+            'sales_form': SaleForm(request.user),
+            'issued_product': issued_product,
+            'is_out_of_stock': True
+        })
     
     sales_form = SaleForm(request.user, request.POST or None)
     if request.method == 'POST':
@@ -77,17 +85,17 @@ def issue_item(request, pk):
             # Calculate the total sale value
             total_sale_value = issued_quantity * issued_product.unit_price
             
-            # Check if the total sale value is less than 5000
-            if total_sale_value < 5000:
-                messages.error(request, f"Sale value must be at least 5000. Current sale value is {total_sale_value}.")
+            # Check if the total sale value is less than 200
+            if total_sale_value < 200:
+                messages.error(request, f"Sale value must be at least 200. Current sale value is {total_sale_value}.")
                 return render(request, "kgl_app/issue_item.html", {'sales_form': sales_form, 'issued_product': issued_product})
             
             # Proceed with the sale if both conditions are met
             new_sale = sales_form.save(commit=False)
             new_sale.product = issued_product.product_name
             new_sale.unit_price = issued_product.unit_price
-            new_sale.branch = issued_product.branch  # Ensure the sale is linked to the correct branch
-            new_sale.salesagent = request.user.username  # Record the sales agent
+            new_sale.branch = issued_product.branch
+            new_sale.salesagent = request.user.username
             new_sale.save()
             
             # Update the stock quantity
@@ -95,8 +103,12 @@ def issue_item(request, pk):
             issued_product.save()
             
             messages.success(request, f"Successfully sold {issued_quantity} units of {issued_product.product_name} for {total_sale_value}.")
-            return redirect('products')  # This ensures redirection to the products page
-    return render(request, "kgl_app/issue_item.html", {'sales_form': sales_form, 'issued_product': issued_product})
+            return redirect('products')
+    return render(request, "kgl_app/issue_item.html", {
+        'sales_form': sales_form,
+        'issued_product': issued_product,
+        'is_out_of_stock': False
+    })
 
 
 @login_required
@@ -221,16 +233,36 @@ def addproduct(request, pk=None):
 def creditsales(request):
     if not request.user.is_salesagent:
         return HttpResponseForbidden("You are not authorized to perform this action.")
+    # Fetch products for the user's branch to pass to the template
+    products = Product.objects.filter(branch=request.user.branch)
     if request.method == 'POST':
         form = CreditSaleForm(request.user, request.POST)
         if form.is_valid():
+            # Check if the selected product is in stock
+            product_name = form.cleaned_data['product_name']
+            try:
+                product = Product.objects.get(product_name=product_name, branch=request.user.branch)
+                if product.total_quantity == 0:
+                    messages.error(request, f"{product_name} is not in stock and cannot be sold on credit.")
+                    return render(request, 'kgl_app/creditsales.html', {'form': form, 'products': products})
+                if product.total_quantity < form.cleaned_data['quantity']:
+                    messages.error(request, f"Insufficient stock! Only {product.total_quantity} units of {product_name} are available.")
+                    return render(request, 'kgl_app/creditsales.html', {'form': form, 'products': products})
+                # Update stock quantity
+                product.total_quantity -= form.cleaned_data['quantity']
+                product.save()
+            except Product.DoesNotExist:
+                messages.error(request, f"Product {product_name} does not exist in your branch.")
+                return render(request, 'kgl_app/creditsales.html', {'form': form, 'products': products})
+            
             form.save()
+            messages.success(request, f"Credit sale of {form.cleaned_data['quantity']} units of {product_name} recorded successfully.")
             return redirect('home')
         else:
-            return render(request, 'kgl_app/creditsales.html', {'form': form})
+            return render(request, 'kgl_app/creditsales.html', {'form': form, 'products': products})
     else:
         form = CreditSaleForm(request.user)
-    return render(request, "kgl_app/creditsales.html", {'form': form})
+    return render(request, "kgl_app/creditsales.html", {'form': form, 'products': products})
 
 
 @login_required
