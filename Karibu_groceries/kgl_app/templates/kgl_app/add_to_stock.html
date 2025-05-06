@@ -1,7 +1,7 @@
 {% load static %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
-<html lang="en" {% if dark_mode %}class="dark"{% endif %}>
+<html lang="en" {% if dark_mode %}class="dark" {% endif %}>
 
 <head>
     <meta charset="UTF-8">
@@ -27,6 +27,7 @@
             font-family: 'Poppins', sans-serif;
             background-color: #f8f9fa;
             position: relative;
+            min-height: 100vh;
         }
 
         html.dark body {
@@ -183,13 +184,53 @@
             margin-right: 8px;
         }
 
+        /* Error Message */
+        .error-message {
+            background: var(--light-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        html.dark .error-message {
+            background: #2a2a2a;
+            color: var(--dark-text);
+        }
+
+        .error-message .error-icon {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .error-message h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        html.dark .error-message h3 {
+            color: var(--secondary-color);
+        }
+
+        .error-message p {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        html.dark .error-message p {
+            color: #ccc;
+        }
+
         /* Footer */
         footer {
             text-align: center;
             margin-top: 30px;
             padding: 20px;
             background-color: #d1dfed;
-            border-radius: var(--border-radius) var(---border-radius) 0 0;
+            border-radius: var(--border-radius) var(--border-radius) 0 0;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
         }
 
@@ -213,6 +254,23 @@
             background: var(--primary-color);
         }
 
+        /* Fade-in Animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         /* Responsive Adjustments */
         @media (max-width: 576px) {
             .form-container {
@@ -227,6 +285,18 @@
             .btn-update,
             .btn-back {
                 padding: 8px 16px;
+                font-size: 0.9rem;
+            }
+
+            .error-message .error-icon {
+                font-size: 2rem;
+            }
+
+            .error-message h3 {
+                font-size: 1.3rem;
+            }
+
+            .error-message p {
                 font-size: 0.9rem;
             }
         }
@@ -268,6 +338,16 @@
             <div class="form-header">
                 <h1><i class="fas fa-box-open"></i> Update Stock Levels</h1>
             </div>
+            {% if error_message %}
+            <div class="error-message text-center">
+                <i class="fas fa-exclamation-triangle error-icon"></i>
+                <h3>Access Denied</h3>
+                <p>{{ error_message }}</p>
+                <a href="javascript:history.back()" class="btn-back">
+                    <i class="fas fa-arrow-left"></i> Go Back
+                </a>
+            </div>
+            {% else %}
             <form method="POST" class="update-form">
                 {% csrf_token %}
                 {{ form|crispy }}
@@ -280,10 +360,10 @@
                     <i class="fas fa-arrow-left"></i> Back to Products
                 </a>
             </div>
+            {% endif %}
         </div>
     </div>
     {% endblock %}
-
     <footer>
         <div class="row align-items-center justify-content-center">
             <div class="col-auto">

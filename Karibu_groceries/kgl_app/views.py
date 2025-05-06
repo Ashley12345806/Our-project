@@ -110,11 +110,12 @@ def issue_item(request, pk):
         'is_out_of_stock': False
     })
 
-
 @login_required
 def sales(request):
     if not (request.user.is_owner or request.user.is_manager):
-        return HttpResponseForbidden("You are not authorized to perform this action.")
+        return render(request, "kgl_app/sales.html", {
+            'error_message': "You are not authorized to perform this action. Only owners and managers can view sales."
+        })
     if request.user.is_owner:
         sales = Sale.objects.all().order_by('id')
     else:
@@ -307,10 +308,16 @@ def receipt_detail(request, receipt_id):
 @login_required
 def add_to_stock(request, pk):
     if not request.user.is_manager:
-        return HttpResponseForbidden("You are not authorized to perform this action.")
+        return render(request, "kgl_app/add_to_stock.html", {
+            'form': None,
+            'error_message': "You are not authorized to perform this action. Only managers can update stock."
+        })
     issued_product = get_object_or_404(Product, id=pk)
     if issued_product.branch != request.user.branch:
-        return HttpResponseForbidden("You are not authorized to update this product.")
+        return render(request, "kgl_app/add_to_stock.html", {
+            'form': None,
+            'error_message': "You are not authorized to update this product. It belongs to a different branch."
+        })
     form = AddForm(request.POST or None)
     if request.method == 'POST':
         if form.is_valid():

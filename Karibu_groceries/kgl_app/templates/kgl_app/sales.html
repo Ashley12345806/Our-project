@@ -1,120 +1,132 @@
+<!-- sales.html -->
 {% extends 'kgl_app/base.html' %}
 {% load static %}
 {% block content %}
-  <link rel="stylesheet" href="{% static '/css/sales.css/' %}">
-  <title>Sales - Karibu Groceries</title>
+<link rel="stylesheet" href="{% static '/css/sales.css/' %}">
+<title>Sales - Karibu Groceries</title>
 
-  <div class="container py-4">
-    <div class="sales-header">
-      <h1><i class="fas fa-chart-line"></i> TOTAL SALES</h1>
-      <p>Overview of all transactions and performance</p>
-    </div>
+<div class="container py-4">
+  {% if error_message %}
+  <div class="error-message text-center">
+    <i class="fas fa-exclamation-triangle error-icon"></i>
+    <h3>Access Denied</h3>
+    <p>{{ error_message }}</p>
+    <a href="javascript:history.back()" class="btn-back">
+      <i class="fas fa-arrow-left"></i> Go Back
+    </a>
+  </div>
+  {% else %}
+  <div class="sales-header">
+    <h1><i class="fas fa-chart-line"></i> TOTAL SALES</h1>
+    <p>Overview of all transactions and performance</p>
+  </div>
 
-    <div class="row">
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card summary-card">
-          <div class="card-decoration"></div>
-          <div class="card-body">
-            <i class="fas fa-hand-holding-usd card-icon"></i>
-            <h5 class="card-title">Total Amount Expected</h5>
-            <p class="card-text">UGX {{ total_expected }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card summary-card">
-          <div class="card-decoration"></div>
-          <div class="card-body">
-            <i class="fas fa-credit-card card-icon"></i>
-            <h5 class="card-title">Total Debt Issued</h5>
-            <p class="card-text">UGX {{ total_change }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card summary-card">
-          <div class="card-decoration"></div>
-          <div class="card-body">
-            <i class="fas fa-money-bill-wave card-icon"></i>
-            <h5 class="card-title">Total Amount Received</h5>
-            <p class="card-text">UGX {{ total }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="col-lg-3 col-md-6 mb-4">
-        <div class="card summary-card">
-          <div class="card-decoration"></div>
-          <div class="card-body">
-            <i class="fas fa-piggy-bank card-icon"></i>
-            <h5 class="card-title">Net Amount</h5>
-            <p class="card-text">UGX {{ net }}</p>
-          </div>
+  <div class="row">
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card summary-card">
+        <div class="card-decoration"></div>
+        <div class="card-body">
+          <i class="fas fa-hand-holding-usd card-icon"></i>
+          <h5 class="card-title">Total Amount Expected</h5>
+          <p class="card-text">UGX {{ total_expected }}</p>
         </div>
       </div>
     </div>
 
-    <h2 class="section-title"><i class="fas fa-receipt me-2"></i> Sales Details</h2>
-    
-    <div class="row">
-      {% for sale in sales %}
-      <div class="col-lg-4 col-md-6 mb-4">
-        <div class="card sale-card">
-          <div class="card-header">
-            <i class="fas fa-user customer-icon"></i>
-            <h5>{{ sale.customer_name|title }}</h5>
-            <a href="{% url 'receipt_detail' sale.id %}" class="receipt-link">
-              <i class="fas fa-receipt"></i>
-            </a>
-          </div>
-          <div class="card-body">
-            <div class="sale-product">
-              <i class="fas fa-shopping-basket"></i>
-              <span>{{ sale.product|title }}</span>
-            </div>
-            
-            <div class="sale-details-grid">
-              <div class="sale-detail-item">
-                <span class="detail-label">Quantity</span>
-                <span class="detail-value">{{ sale.quantity }}</span>
-              </div>
-              
-              <div class="sale-detail-item">
-                <span class="detail-label">Unit Price</span>
-                <span class="detail-value">UGX {{ sale.unit_price }}</span>
-              </div>
-              
-              <div class="sale-detail-item">
-                <span class="detail-label">Total Cost</span>
-                <span class="detail-value">UGX {{ sale.get_total }}</span>
-              </div>
-              
-              <div class="sale-detail-item">
-                <span class="detail-label">Amount Paid</span>
-                <span class="detail-value">UGX {{ sale.amount_received }}</span>
-              </div>
-            </div>
-            
-            <div class="sale-balance">
-              <span class="balance-label">Balance</span>
-              <span class="balance-value">UGX {{ sale.get_change }}</span>
-            </div>
-          </div>
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card summary-card">
+        <div class="card-decoration"></div>
+        <div class="card-body">
+          <i class="fas fa-credit-card card-icon"></i>
+          <h5 class="card-title">Total Debt Issued</h5>
+          <p class="card-text">UGX {{ total_change }}</p>
         </div>
       </div>
-      {% empty %}
-      <div class="col-12 text-center py-5">
-        <div class="empty-sales">
-          <i class="fas fa-receipt" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
-          <h3 style="color: var(--primary-color); margin-bottom: 10px;">No Sales Records Found</h3>
-          <p style="color: #888; max-width: 500px; margin: 0 auto;">
-            Your sales records will appear here once customers make purchases. Start recording your first sale!
-          </p>
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card summary-card">
+        <div class="card-decoration"></div>
+        <div class="card-body">
+          <i class="fas fa-money-bill-wave card-icon"></i>
+          <h5 class="card-title">Total Amount Received</h5>
+          <p class="card-text">UGX {{ total }}</p>
         </div>
       </div>
-      {% endfor %}
+    </div>
+
+    <div class="col-lg-3 col-md-6 mb-4">
+      <div class="card summary-card">
+        <div class="card-decoration"></div>
+        <div class="card-body">
+          <i class="fas fa-piggy-bank card-icon"></i>
+          <h5 class="card-title">Net Amount</h5>
+          <p class="card-text">UGX {{ net }}</p>
+        </div>
+      </div>
     </div>
   </div>
-  {% endblock %}
+
+  <h2 class="section-title"><i class="fas fa-receipt me-2"></i> Sales Details</h2>
+
+  <div class="row">
+    {% for sale in sales %}
+    <div class="col-lg-4 col-md-6 mb-4">
+      <div class="card sale-card">
+        <div class="card-header">
+          <i class="fas fa-user customer-icon"></i>
+          <h5>{{ sale.customer_name|title }}</h5>
+          <a href="{% url 'receipt_detail' sale.id %}" class="receipt-link">
+            <i class="fas fa-receipt"></i>
+          </a>
+        </div>
+        <div class="card-body">
+          <div class="sale-product">
+            <i class="fas fa-shopping-basket"></i>
+            <span>{{ sale.product|title }}</span>
+          </div>
+
+          <div class="sale-details-grid">
+            <div class="sale-detail-item">
+              <span class="detail-label">Quantity</span>
+              <span class="detail-value">{{ sale.quantity }}</span>
+            </div>
+
+            <div class="sale-detail-item">
+              <span class="detail-label">Unit Price</span>
+              <span class="detail-value">UGX {{ sale.unit_price }}</span>
+            </div>
+
+            <div class="sale-detail-item">
+              <span class="detail-label">Total Cost</span>
+              <span class="detail-value">UGX {{ sale.get_total }}</span>
+            </div>
+
+            <div class="sale-detail-item">
+              <span class="detail-label">Amount Paid</span>
+              <span class="detail-value">UGX {{ sale.amount_received }}</span>
+            </div>
+          </div>
+
+          <div class="sale-balance">
+            <span class="balance-label">Balance</span>
+            <span class="balance-value">UGX {{ sale.get_change }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12 text-center py-5">
+      <div class="empty-sales">
+        <i class="fas fa-receipt" style="font-size: 64px; color: #ddd; margin-bottom: 20px;"></i>
+        <h3 style="color: var(--primary-color); margin-bottom: 10px;">No Sales Records Found</h3>
+        <p style="color: #888; max-width: 500px; margin: 0 auto;">
+          Your sales records will appear here once customers make purchases. Start recording your first sale!
+        </p>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

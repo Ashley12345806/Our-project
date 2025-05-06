@@ -77,20 +77,18 @@ html.dark .card {
   transition: background-color 0.3s;
 }
 
-.btn-custom.add-stock:hover {
-  background-color: #333333;
-  color: white;
-}
 
-.btn-custom.add-credit,
-.btn-custom.back {
+.btn-custom.add-credit {
   background-color:#5D5CDE;
   border: none;
   border-radius: 20px;
   padding: 10px 20px;
   color: rgb(40, 39, 39);
   transition: background-color 0.3s;
-  size: 10px;
+}
+.btn-custom.back{
+  background-color:#FF9F67;
+  
 }
 
 
